@@ -28,6 +28,19 @@ myApp.onPageInit('about', function (page) {
     myApp.alert('Here comes About page');
 })
 
+myApp.onPageInit('edit', function(page){
+  myApp.popup('.popup-add');
+  var calendar = myApp.calendar({
+      input: '#date',
+      dateFormat: 'yyyy-mm-dd'
+      // toolbar: true
+  });
+  
+  getEventsByKey();
+  // myApp.showToolbar({toolbar: '#edit-toolbar'});
+  myApp.closePanel();
+})
+
 myApp.onPageInit('add', function(page){
 
   var calendar = myApp.calendar({
@@ -35,12 +48,16 @@ myApp.onPageInit('add', function(page){
       dateFormat: 'yyyy-mm-dd'
       // toolbar: true
   });
+  
   myApp.closePanel();
 })
 
-myApp.onPageInit('timeline', function(page){
-  myApp.closePanel();
-})
+// myApp.onPageInit('login-screen', function(page){
+  
+//   myApp.closePanel();
+// })
+
+
 
 myApp.onPageInit('login-screen', function (page) {
   var pageContainer = $$(page.container);
@@ -52,6 +69,7 @@ myApp.onPageInit('login-screen', function (page) {
       mainView.router.back();
     });
   });
+  myApp.closePanel();
 });
 
 // Option 2. Using one 'pageInit' event handler for all pages:
