@@ -1,7 +1,9 @@
 // Initialize app
 var myApp = new Framework7({
-    pushState: true,
-    swipePanel: 'left'
+    // pushState: true,
+    swipePanel: 'left',
+    smartSelectOpenIn: 'page'
+    // smartSelectSearchbar:true
 });
 
 
@@ -13,6 +15,10 @@ var mainView = myApp.addView('.view-main', {
     // Because we want to use dynamic navbar, we need to enable it for this view:
     dynamicNavbar: true
 });
+
+// var addView = myApp.addView('.view-add', {
+//     // dynamicNavbar: true
+// });
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
@@ -47,6 +53,16 @@ myApp.onPageInit('add', function(page){
       input: '#date',
       dateFormat: 'yyyy-mm-dd'
       // toolbar: true
+  });
+  
+  var pickerDevice = myApp.picker({
+   input: '#picker-device',
+     cols: [
+        {
+           textAlign: 'center',
+           values: getClubs()
+        }
+     ]
   });
   
   myApp.closePanel();
@@ -98,3 +114,4 @@ myApp.onPageInit('login-screen', function (page) {
 //     // Following code will be executed for page with data-page attribute equal to "about"
 //     myApp.alert('Here comes About page');
 // })
+

@@ -10,3 +10,7 @@ var FbApp = firebase.initializeApp(config);
 var db = FbApp.database();
 var eventsRef = db.ref("events");
 console.log("eventsRef: " + eventsRef);
+
+var clubsRef = db.ref("clubs");
+console.log("eventsRef: " + clubsRef);
+
