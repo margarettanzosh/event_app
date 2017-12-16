@@ -3,7 +3,7 @@ var monthName = ["January", "Februrary", "March", "April", "May", "June", "July"
 function eventAdd() {
   var name = $$('#name').val();
   var date = $$('#date').val();
-  var teacher = $$('#teacher').val();
+  var teacher = $$('#picker-device').val();
   var desc = $$('#desc').val();
   // check that date and name entered
   if (!name || !date) {
@@ -40,7 +40,10 @@ function eventUpdate(key) {
       $$('#descUpdate').val(formData.description);
 
       $$('#dateUpdate').val(formData.date);
-
+      
+      var addclick = '<a href="#" class="back link" id="update_event" onclick = updateEventDB("' + snapshot.key + '")>Save  </a>';
+      $$('#onclicksave').html(addclick);
+      
       var calendar = myApp.calendar({
         input: '#dateUpdate',
         dateFormat: 'yyyy-mm-dd'
@@ -52,9 +55,9 @@ function eventUpdate(key) {
   mainView.router.loadPage('update.html');
   
   // when event clicked on, call function to update database
-  $$('#update_event').on('click', function() {
-    updateEventDB(key);
-  });
+  // $$('#update_event').on('click', function() {
+  //   updateEventDB(key);
+  // });
 }
 
 function updateEventDB(key) {
@@ -96,6 +99,8 @@ function saveToFB(name, date, teacher, desc) {
 function refreshEventEdit(elist) {
   var elis = '<ul>';
   for (var i = 0; i < elist.length; i++) {
+    
+    
 
     var longDateStr = moment(elist[i].date, 'Y-M-D').format('ddd MMM D');
     elis += '<li class = "swipeout">' +
@@ -168,6 +173,21 @@ function getEventsByKey() {
     refreshEventEdit(elist);
   })
 
+}
+
+function getClubs() {
+  var options = [];
+  clubsRef.on("value", function(snapshot) {
+    var data = snapshot.val();
+    
+    for (var key in data)
+    {
+      options.push(data[key].club_name);
+    }
+    console.log(options);
+  })
+  return options;
+  // $$('#optionID').html(options);
 }
 
 

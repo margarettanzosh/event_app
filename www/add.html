@@ -1,13 +1,12 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
 
-<div class="popup popup-add">
+<div class="view view-add">
 <!-- Top Navbar-->
 <div class="navbar">
     <div class="navbar-inner">
         <div class="left">
             <a href="#" class="back link">
-                
-                <span>Cancel</span>
+              <span>Cancel</span>
             </a>
         </div>
         <div class="center">New Event</div>
@@ -26,7 +25,7 @@
             <li>
               <div class="item-content">
                 <div class="item-inner">
-                  <div class="item-title label">Event</div>
+                  <!--<div class="item-title label">Event</div>-->
                   <div class="item-input">
                     <input type="text" id="name" placeholder="Enter Name of Event">
                   </div>
@@ -35,20 +34,26 @@
             </li>
 
             <li>
+              
+              
               <div class="item-content">
                 <div class="item-inner">
-                  <div class="item-title label">Club</div>
+                  <!--<div class="item-title">Club</div>-->
                   <div class="item-input">
-                    <input type="text" id="teacher" placeholder="Choose Club">
+                    <!--<input type="text" id="teacher" placeholder="Choose Club">-->
+                    <input type="text" placeholder="Choose Club" readonly id="picker-device">
+
+
                   </div>
                 </div>
               </div>
+            
             </li>
 
             <li>
               <div class="item-content">
                 <div class="item-inner">
-                  <div class="item-title label">Email</div>
+                  <!--<div class="item-title label">Email</div>-->
                   <div class="item-input">
                     <input type="email" id="email" placeholder="Enter Email">
                   </div>
@@ -59,7 +64,7 @@
             <li>
               <div class="item-content">
                 <div class="item-inner">
-                  <div class="item-title label">Description</div>
+                  <!--<div class="item-title label">Description</div>-->
                   <div class="item-input">
                     <input type="text" id="desc" placeholder="Enter Event Description">
                   </div>
@@ -70,7 +75,7 @@
             <li>
               <div class="item-content">
                 <div class="item-inner">
-                  <div class="item-title label">Date</div>
+                  <!--<div class="item-title label">Date</div>-->
                   <div class="item-input">
 
                     <input type="text" readonly id="date" placeholder="Choose Event Date">
