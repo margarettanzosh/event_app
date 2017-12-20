@@ -5,19 +5,21 @@ function eventAdd() {
   var date = $$('#date').val();
   var teacher = $$('#picker-device').val();
   var desc = $$('#desc').val();
+  var room  = $$('#room').val();
   // check that date and name entered
   if (!name || !date) {
     alert("Enter a name and date!");
   }
   else {
     // add to DB here
-    saveToFB(name, date, teacher, desc);
+    saveToFB(name, date, teacher, desc, room);
     console.log("Added to DB!");
   }
   $$('#name').val("");
   $$('#date').val("");
   $$('#teacher').val("");
   $$('#desc').val("");
+  $$('#room').val("");
 };
 
 function eventRemove(key) {
@@ -35,11 +37,10 @@ function eventUpdate(key) {
     // myApp.formFromJSON('#update-form', JSON.stringify(formData));
     myApp.onPageInit('update', function() {
       $$('#nameUpdate').val(formData.name);
-
       $$('#teacherUpdate').val(formData.teacher);
       $$('#descUpdate').val(formData.description);
-
       $$('#dateUpdate').val(formData.date);
+      $$('#roomUpdate').val(formData.room);
       
       var addclick = '<a href="#" class="back link" id="update_event" onclick = updateEventDB("' + snapshot.key + '")>Save  </a>';
       $$('#onclicksave').html(addclick);
@@ -65,13 +66,15 @@ function updateEventDB(key) {
   var date = $$('#dateUpdate').val();
   var teacher = $$('#teacherUpdate').val();
   var desc = $$('#descUpdate').val();
+  var room = $$('#roomUpdate').val();
 
   // update DB here
   eventsRef.child(key).update({
     name: name,
     date: date,
     teacher: teacher,
-    description: desc
+    description: desc,
+    room: room
   })
   console.log("Event Updated! Key: " + key);
 
@@ -83,15 +86,17 @@ function eventClear() {
   $$('#date').val("");
   $$('#teacher').val("");
   $$('#desc').val("");
+  $$('#room').val("");
 }
 
-function saveToFB(name, date, teacher, desc) {
+function saveToFB(name, date, teacher, desc, room) {
   // this will save data to Firebase
   eventsRef.push({
     name: name,
     date: date,
     teacher: teacher,
-    description: desc
+    description: desc,
+    room: room
   });
 };
 
@@ -164,8 +169,9 @@ function getEventsByKey() {
             key: key,
             name: name,
             date: date,
-            teacher: data[key].teacher,
-            description: data[key].description
+            club: data[key].club,
+            description: data[key].description,
+            room: data[key].room
           })
         }
       }
@@ -209,6 +215,7 @@ function getEventsByMonth() {
         date: data["date"],
         teacher: data["teacher"],
         description: data["description"]
+        // room: data["room"]
       })
     }
 
