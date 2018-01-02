@@ -45,23 +45,24 @@ function eventUpdate(key) {
       $$('#clubUpdate').val(formData.club);
       $$('#descUpdate').val(formData.description);
       $$('#dateUpdate').val(formData.date);
+
       $$('#roomUpdate').val(formData.room);
       $$('#emailUpdate').val(formData.email);
-      $$('timeUpdate').val(formData.time);
+      $$('#timeUpdate').val(formData.time);
 
       var addclick = '<a href="#" class="back link" id="update_event" onclick = updateEventDB("' + snapshot.key + '")>Save  </a>';
       $$('#onclicksave').html(addclick);
-      
+
       var calendar = myApp.calendar({
         input: '#dateUpdate',
         dateFormat: 'yyyy-mm-dd'
       });
     });
   });
-  
+
   // load update page with current input field data
   mainView.router.loadPage('update.html');
-  
+
   // when event clicked on, call function to update database
   // $$('#update_event').on('click', function() {
   //   updateEventDB(key);
@@ -120,8 +121,8 @@ function saveToFB(name, date, club, desc, room) {
 function refreshEventEdit(elist) {
   var elis = '<ul>';
   for (var i = 0; i < elist.length; i++) {
-    
-    
+
+
 
     var longDateStr = moment(elist[i].date, 'Y-M-D').format('ddd MMM D');
     elis += '<li class = "swipeout">' +
@@ -203,9 +204,8 @@ function getClubs() {
   var options = [];
   clubsRef.on("value", function(snapshot) {
     var data = snapshot.val();
-    
-    for (var key in data)
-    {
+
+    for (var key in data) {
       options.push(data[key].club_name);
     }
     console.log(options);
@@ -218,6 +218,7 @@ function getClubs() {
 
 
 function getEventsByMonth() {
+
   var list = [];
   for (var i = 0; i < 12; i++) {
     list[i] = [];
@@ -271,11 +272,21 @@ function getEventsByMonth() {
       year = date.substring(0, 4);
       return year;
     }
+    
     // refresh the UI
     refreshUI(list);
     // console.log(list);
   });
+  
+  // redirect to login screen if not logged in
+  // if (!firebase.auth().currentUser) {
+  //   mainView.router.loadPage("login-screen-page.html");
+  // }
+  // else {
+  //   mainView.router.loadPage("index.html");
+  // }
+
 
 }
 
-getEventsByMonth();
+// getEventsByMonth();

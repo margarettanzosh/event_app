@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html class="with-statusbar-overlay">
+
 <head>
   <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
@@ -67,10 +68,20 @@
                   </a>
                 </li>
                 <li>
-                  <a href="login-screen-page.html" class="item-link">
+                  <a href="#" class="item-link open-login-screen">
+
                     <div class="item-content">
                       <div class="item-inner">
                         <div class="item-title">Login</div>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onclick="openCreateAccount()" class="item-link">
+                    <div class="item-content">
+                      <div class="item-inner">
+                        <div class="item-title">Create Account</div>
                       </div>
                     </div>
                   </a>
@@ -112,24 +123,31 @@
   <div class="views">
     <!-- Your main view, should have "view-main" class -->
     <div class="view view-main">
+      
       <!-- Top Navbar-->
-      <div class="navbar">
-        <div class="navbar-inner">
-          <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-          <div class="center sliding">NEST+m Clubs</div>
-          <div class="right">
-            <!--
+          <div class="navbar">
+            <div class="navbar-inner">
+              <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
+              <div class="center sliding">NEST+m Clubs</div>
+              <div class="right">
+                <!--
                           Right link contains only icon - additional "icon-only" class
                           Additional "open-panel" class tells app to open panel when we click on this link
                         -->
-            <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+          <!--End Navbar-->
+
       <!-- Pages container, because we use fixed-through navbar and toolbar, it has additional appropriate classes-->
       <div class="pages navbar-through toolbar-through">
         <!-- Page, "data-page" contains page name -->
         <div data-page="index" class="page">
+          
+
+          
+
           <!-- Scrollable page content -->
           <div class="page-content">
             <div class="content-block">
@@ -138,19 +156,77 @@
               </div>
             </div>
           </div>
+
+          <!-- Bottom Toolbar-->
+          <div class="toolbar">
+            <div class="toolbar-inner">
+              <!-- Toolbar links -->
+              <a href="about.html" class="link">About</a>
+              <a href="#" onclick="confirmOk()"><i class="f7-icons">logout</i></a>
+            </div>
+          </div>
+
         </div>
       </div>
-      <!-- Bottom Toolbar-->
-      <div class="toolbar">
 
-        <div class="toolbar-inner">
-          <!-- Toolbar links -->
-          <a href="about.html" class="link">About</a>
-          <a href="#"></a><i class="f7-icons">search</i></a>
+    </div>
+  </div>
+
+
+  <!--Login Screen-->
+  <div class="login-screen">
+    <div class="view">
+      <div id="content-goes-here" class="page no-navbar no-toolbar no-swipeback">
+        <div class="page-content login-screen-content layout-white">
+          <img src="css/logo.png" class="center" style="width: 60%; margin-top: 50px" />
+          <div class="login-screen-title" style="color: white; font-weight: lighter; letter-spacing: 2px;">Event Tracker</div>
+
+          <form>
+
+            <div class="list-block inset" style="padding: 0 20px; margin: auto; opacity: 0.5;">
+              <ul style="border-radius: 5px;" class="center">
+                <li class="item-content">
+                  <div class="item-media"><i class="icon f7-icons size-18">email</i></div>
+                  <div class="item-inner">
+                    <div class="item-input">
+                      <input type="text" id="email" name="username" placeholder="Email" />
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="list-block inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: 0.5;">
+              <ul style="border-radius: 5px;">
+                <li class="item-content">
+                  <div class="item-media"><i class="icon f7-icons size-18">lock</i></div>
+                  <div class="item-inner">
+                    <div class="item-input">
+                      <input type="password" id="password" name="password" placeholder="Password" />
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="content-block inset">
+              <p><a href="#" id="quickstart-sign-in" style="margin: 0 5px;" onclick="toggleSignIn()" class="item-link button button-big color-white">Login</a></p>
+            </div>
+            
+            <div style="text-align: center;">
+              <p><a class="center-white" style="margin: 5px;" onclick="sendPasswordReset();" href="#">Forgot Password?</a></p>
+            </div>
+
+            <div style="text-align: center; margin-top: 100px">
+              <a href="#"  onclick="signUp();" style="margin: 5px;" class="center-white">No account? <strong>Sign Up</strong></a></p>
+            </div>
+            
+          </form>
         </div>
       </div>
     </div>
   </div>
+
 
   <script src="js/firebase-app.js"></script>
   <script src="js/firebase-auth.js"></script>
@@ -165,6 +241,12 @@
   <script type="text/javascript" src="js/moment.js"></script>
   <script type="text/javascript" src="js/my-app.js"></script>
   <script type="text/javascript" src="js/my-fb-app.js"></script>
+  <script type="text/javascript" src="js/login-screen-page.js"></script>
+  <script type="text/javascript" src="js/create-account-page.js"></script>
+  <script type="text/javascript" src="js/authorization-page.js"></script>
+  <script type="text/javascript" src="js/email-auth.js"></script>
+
+
 </body>
 
 </html>

@@ -64,3 +64,45 @@
 /*.picker-modal-inner {*/
 /*    background-color: #F7F7F8;*/
 /*}*/
+
+
+.login-screen-content {
+    background: linear-gradient(to bottom right, #2D286F, #E170EA);
+    /*background-image: url("gradient-blue-abstract-background_1159-3091.jpg");*/
+    /*background-color: rgb(219, 208, 239); */
+    /*color: rgb(255, 255, 255);*/
+}
+
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+
+.size-18 {
+    font-size: 18px;
+}
+
+a.hidden {
+    visibility: hidden;
+}
+
+.center-white {
+    color: white;
+    text-align: center;
+    font-size: small;
+}
+
+.center {
+    margin: auto;
+}
+
+
+/*.fade-in {*/
+/*  opacity: 0;*/
+/*  animation: fadeIn .5s ease-in 1 forwards;*/
+/*}*/
+
+/*.fade-out {*/
+/*    opacity: 100;*/
+/*    animation: fadeOut .5s ease-in forwards;*/
+/*}*/
