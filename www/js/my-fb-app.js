@@ -3,21 +3,28 @@ var monthName = ["January", "Februrary", "March", "April", "May", "June", "July"
 function eventAdd() {
   var name = $$('#name').val();
   var date = $$('#date').val();
-  var teacher = $$('#picker-device').val();
+  var club = $$('#picker-device').val();
   var desc = $$('#desc').val();
+  var room  = $$('#room').val();
+  var email = $$('#email').val();
+  var time = $$('time').val();
+  
   // check that date and name entered
   if (!name || !date) {
     alert("Enter a name and date!");
   }
   else {
     // add to DB here
-    saveToFB(name, date, teacher, desc);
+    saveToFB(name, date, club, desc, room);
     console.log("Added to DB!");
   }
   $$('#name').val("");
   $$('#date').val("");
-  $$('#teacher').val("");
+  $$('#club').val("");
   $$('#desc').val("");
+  $$('#room').val("");
+  $$('email').val("");
+  $$('time').val("");
 };
 
 function eventRemove(key) {
@@ -35,11 +42,13 @@ function eventUpdate(key) {
     // myApp.formFromJSON('#update-form', JSON.stringify(formData));
     myApp.onPageInit('update', function() {
       $$('#nameUpdate').val(formData.name);
-
-      $$('#teacherUpdate').val(formData.teacher);
+      $$('#clubUpdate').val(formData.club);
       $$('#descUpdate').val(formData.description);
-
       $$('#dateUpdate').val(formData.date);
+
+      $$('#roomUpdate').val(formData.room);
+      $$('#emailUpdate').val(formData.email);
+      $$('#timeUpdate').val(formData.time);
 
       var addclick = '<a href="#" class="back link" id="update_event" onclick = updateEventDB("' + snapshot.key + '")>Save  </a>';
       $$('#onclicksave').html(addclick);
@@ -63,15 +72,22 @@ function eventUpdate(key) {
 function updateEventDB(key) {
   var name = $$('#nameUpdate').val();
   var date = $$('#dateUpdate').val();
-  var teacher = $$('#teacherUpdate').val();
+  var club = $$('#clubUpdate').val();
   var desc = $$('#descUpdate').val();
 
-  // update DB here
+  var room = $$('#roomUpdate').val();
+  var email = $$('emailUpdate').val();
+  var time = $$('timeUpdate').val();
+  // update DB here. Puts the new entry into the database
   eventsRef.child(key).update({
     name: name,
     date: date,
-    teacher: teacher,
-    description: desc
+    club: club,
+    description: desc,
+    email: email,
+    time: time,
+    room: room
+    
   })
   console.log("Event Updated! Key: " + key);
 
@@ -81,17 +97,23 @@ function updateEventDB(key) {
 function eventClear() {
   $$('#name').val("");
   $$('#date').val("");
-  $$('#teacher').val("");
+  $$('#club').val("");
   $$('#desc').val("");
+  $$('#room').val("");
+  $$('email').val("");
+  $$('time').val("");
 }
 
-function saveToFB(name, date, teacher, desc) {
+function saveToFB(name, date, club, desc, room) {
   // this will save data to Firebase
   eventsRef.push({
     name: name,
     date: date,
-    teacher: teacher,
-    description: desc
+    club: club,
+    description: desc,
+    email: email,
+    time: time,
+    room: room
   });
 };
 
@@ -164,8 +186,11 @@ function getEventsByKey() {
             key: key,
             name: name,
             date: date,
-            teacher: data[key].teacher,
-            description: data[key].description
+            club: data[key].club,
+            description: data[key].description,
+            room: data[key].room,
+            email: email,
+            time: time
           })
         }
       }
@@ -207,8 +232,11 @@ function getEventsByMonth() {
       list[month].push({
         name: data["name"],
         date: data["date"],
-        teacher: data["teacher"],
-        description: data["description"]
+        club: data["club"],
+        description: data["description"],
+        email: data["email"],
+        // room: data["room"],
+        time: data["time"]
       })
     }
 
