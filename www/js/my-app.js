@@ -1,10 +1,12 @@
 // Initialize app
 var myApp = new Framework7({
-    // pushState: true,
+    pushState: true,
     swipePanel: 'left',
-    smartSelectOpenIn: 'page'
+    // smartSelectOpenIn: 'page',
+    modalTitle: 'NEST+m Events'
     // smartSelectSearchbar:true
 });
+
 
 
 // If we need to use custom DOM library, let's save it to $$ variable:
@@ -35,6 +37,7 @@ myApp.onPageInit('about', function (page) {
 })
 
 myApp.onPageInit('edit', function(page){
+  dynamicNavbar: true,
   myApp.popup('.popup-add');
   var calendar = myApp.calendar({
       input: '#date',
@@ -73,20 +76,44 @@ myApp.onPageInit('add', function(page){
 //   myApp.closePanel();
 // })
 
+// try google sign in redirect
+// myApp.onPageInit('index', function (page) {
+// //     // if (!firebase.auth().currentUser) {
+// //     //     var provider = new firebase.auth.GoogleAuthProvider();
+// //     //     firebase.auth().signInWithRedirect(provider);
+// //     //     getRR();
+// //     //     // googleSignin();
+// //     // }
+// // $$('.open-login').on('click', function () {
+// //   myApp.loginScreen('login-screen-page.html');
+// // });
+//     if (firebase.auth().currentUser) {
+
+//         getEventsByMonth();
+//     }
+   
+// }).trigger();
 
 
 myApp.onPageInit('login-screen', function (page) {
   var pageContainer = $$(page.container);
-  pageContainer.find('.list-button').on('click', function () {
-    var username = pageContainer.find('input[name="username"]').val();
-    var password = pageContainer.find('input[name="password"]').val();
-    // Handle username and password
-    myApp.alert('Username: ' + username + ', Password: ' + password, function () {
-      mainView.router.back();
-    });
-  });
+  initApp();
+
   myApp.closePanel();
 });
+
+myApp.onPageInit('create-account-screen', function (page) {
+  var pageContainer = $$(page.container);
+  initAppCreate();
+
+  myApp.closePanel();
+});
+
+$$('.login_screen_js').on('click', function () {
+    myApp.loginScreen();
+});
+
+// <div class=“popup popOver”> </div> myApp.popup(’.popOver');
 
 // Option 2. Using one 'pageInit' event handler for all pages:
 // $$(document).on('pageInit', function (e) {
