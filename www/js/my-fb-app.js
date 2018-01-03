@@ -7,7 +7,7 @@ function eventAdd() {
   var desc = $$('#desc').val();
   var room  = $$('#room').val();
   var email = $$('#email').val();
-  var time = $$('time').val();
+  var time = $$('#time').val();
   
   // check that date and name entered
   if (!name || !date) {
@@ -15,7 +15,7 @@ function eventAdd() {
   }
   else {
     // add to DB here
-    saveToFB(name, date, club, desc, room);
+    saveToFB(name, date, club, desc, email, time, room);
     console.log("Added to DB!");
   }
   $$('#name').val("");
@@ -23,8 +23,8 @@ function eventAdd() {
   $$('#club').val("");
   $$('#desc').val("");
   $$('#room').val("");
-  $$('email').val("");
-  $$('time').val("");
+  $$('#email').val("");
+  $$('#time').val("");
 };
 
 function eventRemove(key) {
@@ -76,8 +76,8 @@ function updateEventDB(key) {
   var desc = $$('#descUpdate').val();
 
   var room = $$('#roomUpdate').val();
-  var email = $$('emailUpdate').val();
-  var time = $$('timeUpdate').val();
+  var email = $$('#emailUpdate').val();
+  var time = $$('#timeUpdate').val();
   // update DB here. Puts the new entry into the database
   eventsRef.child(key).update({
     name: name,
@@ -100,11 +100,11 @@ function eventClear() {
   $$('#club').val("");
   $$('#desc').val("");
   $$('#room').val("");
-  $$('email').val("");
-  $$('time').val("");
+  $$('#email').val("");
+  $$('#time').val("");
 }
 
-function saveToFB(name, date, club, desc, room) {
+function saveToFB(name, date, club, desc, email, time, room) {
   // this will save data to Firebase
   eventsRef.push({
     name: name,
@@ -189,8 +189,8 @@ function getEventsByKey() {
             club: data[key].club,
             description: data[key].description,
             room: data[key].room,
-            email: email,
-            time: time
+            email: data[key].email,
+            time: data[key].time
           })
         }
       }
