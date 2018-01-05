@@ -2,9 +2,9 @@ var createContent = `
 <div data-page="create-account-screen" class="page no-navbar no-toolbar no-swipeback">
     <div class="page-content login-screen-content layout-white">
     <img src="css/logo.png" class="center" style="width: 60%; margin-top: 50px"/>
-    <div class="login-screen-title" style="color: white; font-weight: lighter; letter-spacing: 2px;">Create Account</div>
+    <div class="login-screen-title animated fadeInLeft" style="color: white; font-weight: lighter; letter-spacing: 2px;">Create Account</div>
 
-    <form>
+    <form class="animated fadeInUp">
       
       <div class="list-block inset" style="padding: 0 20px; margin: auto; opacity: 0.5;">
         <ul style="border-radius: 5px;">

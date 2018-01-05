@@ -3,9 +3,9 @@ var createLogin = `
     <div data-page="login-screen" class="page no-navbar no-toolbar no-swipeback">
       <div class="page-content login-screen-content layout-white">
         <img src="css/logo.png" class="center" style="width: 60%; margin-top: 50px" />
-        <div class="login-screen-title" style="color: white; font-weight: lighter; letter-spacing: 2px;">Event Tracker</div>
+        <div class="login-screen-title animated fadeInRight" style="color: white; font-weight: lighter; letter-spacing: 2px;">Event Tracker</div>
 
-        <form>
+        <form class="animated fadeInUp">
           <div class="list-block inset" style="padding: 0 20px; margin: auto; opacity: 0.5;">
             <ul style="border-radius: 5px;" class="center">
               <li class="item-content">
