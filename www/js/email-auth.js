@@ -308,6 +308,15 @@ myApp.onPageInit('index', function(page) {
 }).trigger();
 
 
+// //WIP
+// myApp.onPageInit('profile', function (page) {
+//     dynamicNavbar: true,
+//     $$('#profile_email').html(user);
+//     myApp.closePanel();
+// })
+
+
+
 function signUp() {
   initAppCreate();
   var loginContent = $$('#content-goes-here');

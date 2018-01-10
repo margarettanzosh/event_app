@@ -36,6 +36,11 @@ myApp.onPageInit('about', function (page) {
     myApp.alert('Here comes About page');
 })
 
+myApp.onPageInit('profile', function (page) {
+    dynamicNavbar: true,
+    myApp.closePanel();
+})
+
 myApp.onPageInit('edit', function(page){
   dynamicNavbar: true,
   myApp.popup('.popup-add');
