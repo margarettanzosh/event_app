@@ -1,0 +1,39 @@
+<template>
+  <div data-page="profile" class="page">
+      
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left">
+                <a href="#" class="back link">
+                    <i class="icon icon-back"></i>
+                    <span>Back</span>
+                </a>
+            </div>
+            <div class="title sliding">Profile</div>
+        </div>
+    </div>
+    
+    <div class="page-content">
+        <div class="block">
+            <p>
+                Name: <span id="profile_name">{{user.displayName}}</span>
+            </p>
+            <p>
+                Email: <span id="profile_email">{{user.email}}</span>
+            </p>
+            <p>
+                Admin: <span id="profile_grade">{{user.admin}}</span>
+            </p>
+        </div>
+    </div>
+  </div>
+</template>
+<script>
+    return {
+        data: function() {
+            return {
+                user: myApp.user,
+            };
+        },
+    }
+</script>
