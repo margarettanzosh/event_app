@@ -149,7 +149,7 @@ function initApp() {
       console.log("signed in");
       myApp.user = user;
       
-      var admin = ['QyZRt0iucVZOZGIp1ZdAGaLpI1p2', 'margarettanzosh@nestmk12.net']
+      var admin = ['QyZRt0iucVZOZGIp1ZdAGaLpI1p2', '9wa5aLywAQWgAlvUD8v2ySENGYS2', ]
       if (admin.includes(user.uid)) {
         myApp.user.admin = true;
       } else {
