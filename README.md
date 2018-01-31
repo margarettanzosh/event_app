@@ -1,30 +1,33 @@
-# Framework7 PhoneGap Application 
+# Framework7 V2 PhoneGap Kitchen Sink
 
-> [Framework7](http://www.idangero.us/framework7) is a Mobile UI framework that can be used to build hybrid apps with PhoneGap. This template allows you to get started using Framework7 
-  quickly. 
-  
-  For a more extensive Framework7 sample, see the [one included in their Github project](https://github.com/nolimits4web/Framework7/tree/master/dist)
-  or the [demo apps on their website](http://www.idangero.us/framework7/apps/#.VpQCc5MrKjQ).
-    
-  Also, for an intro to Framework7, check out [this post on the PhoneGap blog](http://phonegap.com/blog/2015/11/30/framework7/).   
+Just a test of Framework7 V2 Kitchen Sink combined with PhoneGap.
 
+----------------------
 
-## Usage
-    
-### PhoneGap CLI
+### Install
 
-    $ phonegap create my-app --template phonegap-template-framework7
+Make sure you have PhoneGap installed: `npm install -g phonegap`.
 
-### Cordova CLI
+Download this repo, then in project directory run this in terminal: `npm install`
 
-    $ cordova create my-app --template phonegap-template-framework7
-    
-### Desktop
+----------------------
 
-In your browser, open the file:
+### Run in iOS simulator
 
-    /www/index.html
+Make sure you have XCode installed and run this:
 
+`phonegap run ios`
 
-  # advancedcodingclub
-#event_app
+----------------------
+
+### Run in browser
+
+`phonegap serve`
+
+Open in your browser `localhost:3000`
+
+----------------------
+
+### Screenshot
+
+![Screenshot](https://raw.githubusercontent.com/valnub/Framework7-v2-PhoneGap-Kitchen-Sink/master/f7-v2-pg-kitchen-sink-screenshot.jpg)
