@@ -9,13 +9,11 @@
   <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap:">
   <title>NEST+m Events (v2)</title>
   <link rel="stylesheet" href="css/animate.css">
-
   <link rel="stylesheet" href="dist/css/framework7.min.css">
   <link rel="stylesheet" href="css/app.css">
   <link rel="apple-touch-icon" href="img/f7-icon-square.png">
   <link rel="icon" href="img/f7-icon.png">
 </head>
-
 <body>
   <div id="app">
     <div class="statusbar"></div>
@@ -74,7 +72,7 @@
             </div>
 
 
-            <form type="submit" data-search-container=".components-list" data-search-in="a" class="searchbar searchbar-expandable searchbar-components">
+            <form data-search-container=".components-list" data-search-in="a" class="searchbar searchbar-expandable searchbar-components">
               <div class="searchbar-inner">
                 <div class="searchbar-input-wrap">
                   <input type="search" placeholder="Search events" />
@@ -87,176 +85,172 @@
           </div>
         </div>
 
-
         <div class="page-content">
           <div id="eventsID"></div>
-
           <div class="list simple-list searchbar-not-found">
             <ul>
               <li>Nothing found</li>
             </ul>
           </div>
-
-
         </div>
       </div>
     </div>
-  
 
-  <!--Login Page-->
-  <div class="login-screen">
-    <div class="page no-toolbar no-navbar no-swipeback app-login">
-      <div class="page-content login-screen-content">
-        <img src="css/logo.png" class="center" style="width: 60%; margin-top: 50px" />
-        <div class="login-screen-title animated fadeInRight" style="color: white; font-weight: lighter; letter-spacing: 2px;">Event Tracker</div>
 
-        <form class="animated fadeInUp">
-          <div class="list inset" style="padding: 0 20px; margin: auto; opacity: .5;">
-            <ul style="background-color: white;  border-radius: 5px;" class="center">
-              <li class="item-content item-input">
-                <div class="item-media"><i class="icon f7-icons size-18">email</i></div>
-                <div class="item-inner">
-                  <div class="item-input-wrap">
-                    <input type="text" id="email" name="username" placeholder="Email" />
+    <!--Login Page-->
+    <div class="login-screen">
+      <div class="page no-toolbar no-navbar no-swipeback app-login">
+        <div class="page-content login-screen-content">
+          <img src="css/logo.png" class="center" style="width: 60%; margin-top: 50px" />
+          <div class="login-screen-title animated fadeInRight" style="color: white; font-weight: lighter; letter-spacing: 2px;">Event Tracker</div>
+
+          <form class="animated fadeInUp">
+            <div class="list inset" style="padding: 0 20px; margin: auto; opacity: .5;">
+              <ul style="background-color: white;  border-radius: 5px;" class="center">
+                <li class="item-content item-input">
+                  <div class="item-media"><i class="icon f7-icons size-18">email</i></div>
+                  <div class="item-inner">
+                    <div class="item-input-wrap">
+                      <input type="text" id="email" name="username" placeholder="Email" />
+                    </div>
                   </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: 0.5;">
-            <ul style="background-color: white; border-radius: 5px;">
-              <li class="item-content item-input">
-                <div class="item-media"><i class="icon f7-icons size-18">lock</i></div>
-                <div class="item-inner">
-                  <div class="item-input-wrap">
-                    <input type="password" id="password" name="password" placeholder="Password" />
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="block inset">
-            <p><a href="#" id="quickstart-sign-in" style="margin: 0 5px;" onclick="toggleSignIn()" class="item-link button button-big color-white">Login</a></p>
-          </div>
-          <div style="text-align: center;">
-            <p><a class="center-white" style="color: white; margin: 5px;" onclick="sendPasswordReset();" href="#">Forgot Password?</a></p>
-          </div>
-          <div class="list">
-
-            <div style="text-align: center; margin-top: 100px">
-              <!--<a href="#" class="login-screen-open panel-close" data-login-screen=".login-screen">Logout</a>-->
-
-              <a href="#" style="color: white; margin: 5px;" class="link popup-open center-white" data-popup=".create-account-screen">No account? <strong> Sign Up</strong></a></p>
+                </li>
+              </ul>
             </div>
-          </div>
 
-        </form>
-      </div>
-    </div>
-  </div>
-  <!--End Login Page-->
-
-  <!--Create Account Screen-->
-  <div class="popup create-account-screen">
-    <div class="page no-toolbar no-navbar no-swipeback">
-      <div class="page-content login-screen-content">
-        <img src="css/logo.png" class="center" style="width: 60%; margin-top: 50px" />
-        <div class="login-screen-title animated fadeInRight" style="color: white; font-weight: lighter; letter-spacing: 2px;">Create Account</div>
-        <form class="animated fadeInUp">
-          <div class="list inset" style="padding: 0 20px; margin: auto; opacity: .5;">
-            <ul style="background-color: white;  border-radius: 5px;" class="center">
-              <li class="item-content item-input">
-                <div class="item-media"><i class="icon f7-icons size-18">person</i></div>
-                <div class="item-inner">
-                  <div class="item-input-wrap">
-                    <input type="text" id="new-name" placeholder="Name" />
-                    <span class="input-clear-button"></span>
+            <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: 0.5;">
+              <ul style="background-color: white; border-radius: 5px;">
+                <li class="item-content item-input">
+                  <div class="item-media"><i class="icon f7-icons size-18">lock</i></div>
+                  <div class="item-inner">
+                    <div class="item-input-wrap">
+                      <input type="password" id="password" name="password" placeholder="Password" />
+                    </div>
                   </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: .5;">
-            <ul style="background-color: white;  border-radius: 5px;" class="center">
-              <li class="item-content item-input">
-                <div class="item-media"><i class="icon f7-icons size-18">email</i></div>
-                <div class="item-inner">
-                  <div class="item-input-wrap">
-                    <input type="text" id="new-email" placeholder="Email" />
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: 0.5;">
-            <ul style="background-color: white; border-radius: 5px;">
-              <li class="item-content item-input">
-                <div class="item-media"><i class="icon f7-icons size-18">lock</i></div>
-                <div class="item-inner">
-                  <div class="item-input-wrap">
-                    <input type="password" id="new-password" placeholder="Password" />
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: 0.5;">
-            <ul style="background-color: white; border-radius: 5px;">
-              <li class="item-content item-input">
-                <div class="item-media"><i class="icon f7-icons size-18">lock</i></div>
-                <div class="item-inner">
-                  <div class="item-input-wrap">
-                    <input type="password" id="confirm-password" placeholder="Confirm Password" />
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="block inset">
-            <p><a href="#" id="quickstart-sign-in" style="margin: 0 5px;" onclick="handleSignUp()" class="item-link button button-big color-white">Create Account</a></p>
-          </div>
-
-          <div class="list">
-            <div style="text-align: center; margin-top: 100px">
-              <a href="#" style="color: white; margin: 5px;" class="link popup-close center-white">Cancel</a></p>
+                </li>
+              </ul>
             </div>
-          </div>
 
-        </form>
-      </div>
-    </div>
-  </div>
-  <!--End of Create Account Screen-->
+            <div class="block inset">
+              <p><a href="#" id="quickstart-sign-in" style="margin: 0 5px;" onclick="toggleSignIn()" class="item-link button button-big color-white">Login</a></p>
+            </div>
+            <div style="text-align: center;">
+              <p><a class="center-white" style="color: white; margin: 5px;" onclick="sendPasswordReset();" href="#">Forgot Password?</a></p>
+            </div>
+            <div class="list">
 
-  <!--Authorization Screen-->
-  <div class="popup authorization-screen">
-    <div class="page no-navbar no-toolbar no-swipeback">
-      <div class="page-content login-screen-content layout-white">
-        <img src="css/logo.png" class="center" style="width: 60%; margin-top: 50px" />
-        <div class="login-screen-title animated fadeInRight" style="color: white; font-weight: lighter; letter-spacing: 2px;">Account Authorization</div>
+              <div style="text-align: center; margin-top: 100px">
+                <!--<a href="#" class="login-screen-open panel-close" data-login-screen=".login-screen">Logout</a>-->
 
+                <a href="#" style="color: white; margin: 5px;" class="link popup-open center-white" data-popup=".create-account-screen">No account? <strong> Sign Up</strong></a></p>
+              </div>
+            </div>
 
-        <div class="block inset animated fadeInUp">
-          <div style="color: white; font-size: larger; margin: 10px;">
-            <p>Please check your email and verify your email address to continue.</p>
-          </div>
-
-          <p><a href="#" style="margin: 0 5px;" onclick="continueIndex();" class="item-link popup-close button button-big color-white">Continue</a></p>
-          <p><a href="#" style="margin: 0 5px;" onclick="sendEmailVerification()" class="item-link button button-big color-white">Resend Authorization Link</a></p>
-
+          </form>
         </div>
       </div>
     </div>
-  </div>
+    <!--End Login Page-->
+
+    <!--Create Account Screen-->
+    <div class="popup create-account-screen">
+      <div class="page no-toolbar no-navbar no-swipeback">
+        <div class="page-content login-screen-content">
+          <img src="css/logo.png" class="center" style="width: 60%; margin-top: 50px" />
+          <div class="login-screen-title animated fadeInRight" style="color: white; font-weight: lighter; letter-spacing: 2px;">Create Account</div>
+          <form class="animated fadeInUp">
+            <div class="list inset" style="padding: 0 20px; margin: auto; opacity: .5;">
+              <ul style="background-color: white;  border-radius: 5px;" class="center">
+                <li class="item-content item-input">
+                  <div class="item-media"><i class="icon f7-icons size-18">person</i></div>
+                  <div class="item-inner">
+                    <div class="item-input-wrap">
+                      <input type="text" id="new-name" placeholder="Name" />
+                      <span class="input-clear-button"></span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: .5;">
+              <ul style="background-color: white;  border-radius: 5px;" class="center">
+                <li class="item-content item-input">
+                  <div class="item-media"><i class="icon f7-icons size-18">email</i></div>
+                  <div class="item-inner">
+                    <div class="item-input-wrap">
+                      <input type="text" id="new-email" placeholder="Email" />
+                      <span class="input-clear-button"></span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: 0.5;">
+              <ul style="background-color: white; border-radius: 5px;">
+                <li class="item-content item-input">
+                  <div class="item-media"><i class="icon f7-icons size-18">lock</i></div>
+                  <div class="item-inner">
+                    <div class="item-input-wrap">
+                      <input type="password" id="new-password" placeholder="Password" />
+                      <span class="input-clear-button"></span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: 0.5;">
+              <ul style="background-color: white; border-radius: 5px;">
+                <li class="item-content item-input">
+                  <div class="item-media"><i class="icon f7-icons size-18">lock</i></div>
+                  <div class="item-inner">
+                    <div class="item-input-wrap">
+                      <input type="password" id="confirm-password" placeholder="Confirm Password" />
+                      <span class="input-clear-button"></span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="block inset">
+              <p><a href="#" id="quickstart-sign-in" style="margin: 0 5px;" onclick="handleSignUp()" class="item-link button button-big color-white">Create Account</a></p>
+            </div>
+
+            <div class="list">
+              <div style="text-align: center; margin-top: 100px">
+                <a href="#" style="color: white; margin: 5px;" class="link popup-close center-white">Cancel</a></p>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--End of Create Account Screen-->
+
+    <!--Authorization Screen-->
+    <div class="popup authorization-screen">
+      <div class="page no-navbar no-toolbar no-swipeback">
+        <div class="page-content login-screen-content layout-white">
+          <img src="css/logo.png" class="center" style="width: 60%; margin-top: 50px" />
+          <div class="login-screen-title animated fadeInRight" style="color: white; font-weight: lighter; letter-spacing: 2px;">Account Authorization</div>
+
+
+          <div class="block inset animated fadeInUp">
+            <div style="color: white; font-size: larger; margin: 10px;">
+              <p>Please check your email and verify your email address to continue.</p>
+            </div>
+
+            <p><a href="#" style="margin: 0 5px;" onclick="continueIndex();" class="item-link popup-close button button-big color-white">Continue</a></p>
+            <p><a href="#" style="margin: 0 5px;" onclick="sendEmailVerification()" class="item-link button button-big color-white">Resend Authorization Link</a></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <!--End Auth Screen-->
 

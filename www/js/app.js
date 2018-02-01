@@ -11,7 +11,7 @@ if (document.location.search.indexOf('theme=') >= 0) {
 var myApp = new Framework7({
   id: 'io.framework7.testapp',
   root: '#app',
-  domCache: true,
+  // domCache: true,
   theme: theme,
   data: function () {
     return {
