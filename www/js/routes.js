@@ -32,6 +32,13 @@ var routes = [
 
   },
   
+  // Update user name - Added
+  {
+    path: '/update-user/',
+    componentUrl: './pages/update-user.html',
+
+  },
+  
   // Admin page - Added
   {
     path: '/admin/',
