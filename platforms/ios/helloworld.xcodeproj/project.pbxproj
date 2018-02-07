@@ -41,6 +41,7 @@
 		E59F869059C54D44AFF4D7A6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD06F44AD9FE4362B5ADB1EA /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2741ADE24A654CACB19FD206 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A4B99C4B584D00B2122BEE /* CoreTelephony.framework */; };
 		8217C8571ECE4A3EBAAD9402 /* CDVVibration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8865BB612B93465BB48B1708 /* CDVVibration.m */; };
+		89C040CF381745EA97F5DD2B /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E2304224317A4EAF894280BE /* CDVLogger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,8 @@
 		E5A4B99C4B584D00B2122BEE /* CoreTelephony.framework */ = {isa = PBXFileReference; name = "CoreTelephony.framework"; path = "System/Library/Frameworks/CoreTelephony.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		8865BB612B93465BB48B1708 /* CDVVibration.m */ = {isa = PBXFileReference; name = "CDVVibration.m"; path = "cordova-plugin-vibration/CDVVibration.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		7C3E996290B74298A483EB89 /* CDVVibration.h */ = {isa = PBXFileReference; name = "CDVVibration.h"; path = "cordova-plugin-vibration/CDVVibration.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		E2304224317A4EAF894280BE /* CDVLogger.m */ = {isa = PBXFileReference; name = "CDVLogger.m"; path = "cordova-plugin-console/CDVLogger.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		8802C8D304094362A3BF7AD0 /* CDVLogger.h */ = {isa = PBXFileReference; name = "CDVLogger.h"; path = "cordova-plugin-console/CDVLogger.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +278,8 @@
 				FBC3CBA2690B413AB2CAFAC4 /* CDVReachability.h */,
 				8865BB612B93465BB48B1708 /* CDVVibration.m */,
 				7C3E996290B74298A483EB89 /* CDVVibration.h */,
+				E2304224317A4EAF894280BE /* CDVLogger.m */,
+				8802C8D304094362A3BF7AD0 /* CDVLogger.h */,
 			);
 			name = Plugins;
 			path = "helloworld/Plugins";
@@ -405,6 +410,7 @@
 				05165DB59E1A4A38810A965C /* CDVConnection.m in Sources */,
 				F0FC8495E0274D00940A8AC2 /* CDVReachability.m in Sources */,
 				8217C8571ECE4A3EBAAD9402 /* CDVVibration.m in Sources */,
+				89C040CF381745EA97F5DD2B /* CDVLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

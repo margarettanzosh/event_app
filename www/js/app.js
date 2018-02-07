@@ -8,7 +8,7 @@ if (document.location.search.indexOf('theme=') >= 0) {
 }
 
 // Init App
-var myApp = new Framework7({
+var app = new Framework7({
   id: 'io.framework7.testapp',
   root: '#app',
   // domCache: true,
@@ -28,17 +28,25 @@ var myApp = new Framework7({
   },
   methods: {
     helloWorld: function () {
-      myApp.dialog.alert('Hello World!');
+      app.dialog.alert('Hello World!');
     },
   },
   routes: routes,
+  navbar: {
+   hideOnPageScroll: true,
+ },
+  statusbar: {
+    enabled: true,
+    iosTextColor: 'white',
+    iosBackgroundColor: '#9C27B0'
+  },
   // vi: {
   //   placementId: 'pltd4o7ibb9rc653x14',
   // },
 });
 
 
-var loginScreen = myApp.loginScreen.create({
+var loginScreen = app.loginScreen.create({
   el: '.login-screen',
   on: {
     opened: function () {
@@ -47,7 +55,7 @@ var loginScreen = myApp.loginScreen.create({
   }
 })
 
-var createAccountScreen = myApp.popup.create({
+var createAccountScreen = app.popup.create({
   el: '.create-account-screen',
   on: {
     opened: function () {
@@ -56,7 +64,7 @@ var createAccountScreen = myApp.popup.create({
   }
 })
 
-var authorizationScreen = myApp.popup.create({
+var authorizationScreen = app.popup.create({
   el: '.authorization-screen',
   on: {
     opened: function () {

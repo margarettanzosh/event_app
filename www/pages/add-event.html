@@ -1,17 +1,17 @@
 <template>
   <div data-page="add-event" class="page">
-  
+
     <!-- Top Navbar-->
     <div class="navbar">
       <div class="navbar-inner">
         <div class="left">
-            <a href="#" class="back link">
+            <a href="#" class="back link white">
               <span>Cancel</span>
             </a>
         </div>
         <div class="title sliding">New Event</div>
         <div class="right">
-            <a href="#" class="back link" id="add_event" onclick="eventAdd();">Save</a>
+            <a href="#" class="back link white" id="add_event" onclick="eventAdd();">Save</a>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
               </div>
             </div>
           </li>
-          
+
           <li>
             <div class="item-content item-input">
               <div class="item-inner">
@@ -41,7 +41,7 @@
               </div>
             </div>
           </li>
-  
+
           <li>
             <div class="item-content item-input">
               <div class="item-inner">
@@ -52,7 +52,7 @@
               </div>
             </div>
           </li>
-  
+
           <li>
             <div class="item-content item-input">
               <div class="item-inner">
@@ -63,29 +63,7 @@
               </div>
             </div>
           </li>
-  
-          <li>
-            <div class="item-content item-input">
-              <div class="item-inner">
-                <div class="item-input-wrap">
-                  <input type="text" readonly="readonly" id="date" placeholder="Choose Event Date">
-                  <span class="input-clear-button"></span>
-                </div>
-              </div>
-            </div>
-          </li>
-          
-          <li>
-          <div class="item-content item-input">
-              <div class="item-inner">
-                <div class="item-input-wrap">
-                    <input type="text" id="time" readonly="readonly" placeholder="Choose Time">
-                    <span class="input-clear-button"></span>
-                </div>
-              </div>
-            </div>
-          </li>
-            
+
           <li>
             <div class="item-content item-input">
               <div class="item-inner">
@@ -96,6 +74,30 @@
               </div>
             </div>
           </li>
+
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" readonly="readonly" id="date" placeholder="Choose Event Date">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                    <input type="text" id="time" readonly="readonly" placeholder="Choose Time">
+                    <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
         </ul>
       </div>
       <!--<div class="block block-strong no-padding no-margin margin-bottom">-->
@@ -112,18 +114,21 @@
         var today = new Date();
         var app = self.$app;
         var $ = self.$;
+        // Try to keep statusbar visible
+        // app.statusbar.show()
+        // app.statusbar.iosOverlaysWebView(true)
         // Default
         self.calendarDefault = app.calendar.create({
           inputEl: '#date',
         });
-        
+
         // Time Picker
         self.timePicker = app.picker.create({
           // containerEl: '#time-picker-container',
           inputEl: '#time',
           // toolbar: false,
           rotateEffect: true,
-          
+
           cols: [
             // Hours
             {
@@ -151,13 +156,13 @@
               values: ['AM', 'PM'],
             }
           ],
-              
+
            formatValue: function (values, displayValues) {
             return displayValues[0] + ':' + values[1] + ' ' + values[2] ;
-          },    
-       
+          },
+
         });
-      
+
         // Club picker
         self.clubPicker = app.picker.create({
           inputEl: '#club-picker',
@@ -168,7 +173,7 @@
             }
           ]
         });
- 
+
       },
       pageBeforeRemove: function() {
         var self = this;

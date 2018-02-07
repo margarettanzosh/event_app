@@ -39,6 +39,8 @@
   font-family: 'Framework7 Icons';
   font-style: normal;
   font-weight: 400;
+  /* added color */
+  color: white;
   src: url("../fonts/Framework7Icons-Regular.eot");
   src: url("../fonts/Framework7Icons-Regular.woff2") format("woff2"),
        url("../fonts/Framework7Icons-Regular.woff") format("woff"),
@@ -496,6 +498,30 @@ a.hidden {
 }
 
 body {
- padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
+ padding-top: constant(safe-area-inset-top);  /* iOS 11.0 */
  padding-top: env(safe-area-inset-top); /* iOS 11.2 */
+ background-color: #9C27B0;
+ color: white;
+}
+
+.statusbar {
+  background-color: #9C27B0;
+  color: white;
+}
+
+.with-statusbar {
+  color: white;
+}
+
+.view-main .navbar {
+  background: #9C27B0;
+  color: #fff;
+}
+
+i, icon {
+  color: #fff;
+}
+
+.white {
+  color: white;
 }

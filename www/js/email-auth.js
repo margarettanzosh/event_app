@@ -18,7 +18,7 @@ function toggleSignIn() {
   // [START authwithemail]
   firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
     getEventsByMonth();
-    myApp.router.navigate('/');
+    app.router.navigate('/');
 
   }).catch(function(error) {
     // Handle Errors here.
@@ -147,21 +147,21 @@ function initApp() {
     if (user) {
       // User is signed in.
       console.log("signed in");
-      myApp.user = user;
+      app.user = user;
       
       var admin = ['QyZRt0iucVZOZGIp1ZdAGaLpI1p2', 'j57jeOfjm8WdkeNDM4hm5uHdojt2', '9wa5aLywAQWgAlvUD8v2ySENGYS2', 'uUIJbVNuNzWpc8pRmkH3e2wwQQU2', 'y0DDHJsN7pMYUZCoe76fOVV6erF3', 'M2t8x0eviMelteFA1ZZe3t92TQE2'];
       
       if (admin.includes(user.uid)) {
-        myApp.user.admin = true;
+        app.user.admin = true;
       } else {
-        myApp.user.admin = false;
+        app.user.admin = false;
       }
       // console.log(JSON.stringify(user, null, '  '));
       loginScreen.close({
         animate: true
       });
       
-      if (!myApp.user.emailVerified) {
+      if (!app.user.emailVerified) {
         console.log("email not verified");
       }
       // [END_EXCLUDE]
@@ -226,9 +226,9 @@ function continueIndex() {
 }
 
 function confirmOk() {
-  myApp.dialog.confirm('Are you sure you want to log out?', 'NEST+m Event Tracker', function() {
+  app.dialog.confirm('Are you sure you want to log out?', 'NEST+m Event Tracker', function() {
     firebase.auth().signOut();
-    // myApp.router.navigate('/login-screen/');
+    // app.router.navigate('/login-screen/');
     loginScreen.open({
         animate: true
       });

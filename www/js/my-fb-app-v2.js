@@ -8,7 +8,7 @@ function eventAdd() {
   var room  = $$('#room').val();
   var email = $$('#email').val();
   var time = $$('#time').val();
-  
+
   // check that date and name entered
   if (!name || !date) {
     alert("Enter a name and date!");
@@ -34,7 +34,7 @@ function eventRemove(key) {
 
 // adds existing values to form
 function eventUpdate(key) {
-  myApp.router.navigate('/update-event/' + key);
+  app.router.navigate('/update-event/' + key);
 };
 
 
@@ -104,9 +104,9 @@ function refreshUI(list) {
 
   // console.log(lis);
   $$('#eventsID').html(cbt);
-  
+
   // create searchbar
-  var searchbar = myApp.searchbar.create({
+  var searchbar = app.searchbar.create({
     el: '.searchbar',
     searchContainer: '.components-list',
     searchIn: 'a',
@@ -116,6 +116,8 @@ function refreshUI(list) {
       }
     }
   });
+  // app.statusbar.show()
+  // app.statusbar.iosOverlaysWebView(true)
 };
 
 function getEventsByKey() {
@@ -166,7 +168,7 @@ function getEventsByMonth() {
 
   // validate that user is logged in
   initApp();
-  
+
   var list = [];
   for (var i = 0; i < 12; i++) {
     list[i] = [];
@@ -219,7 +221,7 @@ function getEventsByMonth() {
       year = date.substring(0, 4);
       return year;
     }
-    
+
     // refresh the UI
     refreshUI(list);
     // console.log(list);
