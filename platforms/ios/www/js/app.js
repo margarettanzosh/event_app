@@ -11,7 +11,8 @@ if (document.location.search.indexOf('theme=') >= 0) {
 var app = new Framework7({
   id: 'io.framework7.testapp',
   root: '#app',
-  // domCache: true,
+  domCache: true,
+  xhrCache: false,
   theme: theme,
   data: function () {
     return {
@@ -44,6 +45,15 @@ var app = new Framework7({
   //   placementId: 'pltd4o7ibb9rc653x14',
   // },
 });
+
+$$(document).on('page:init', '.page[data-name="index"]', function (e) {
+  getEventsByMonth();
+})
+
+$$(document).on('page:init', '.page[data-name="profile"]', function (e) {
+  $$('#profile_name').html(app.user.displayName);
+  app.router.refreshPage()
+})
 
 
 var loginScreen = app.loginScreen.create({

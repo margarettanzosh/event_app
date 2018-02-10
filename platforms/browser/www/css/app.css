@@ -471,7 +471,8 @@ code {
 /*Customized below here*/
 
 .login-screen-content {
-    background: linear-gradient(to bottom right, #2D286F, #E170EA);
+    /* background: linear-gradient(to bottom right, #2D286F, #E170EA); */
+    background: #7B1FA2
 }
 
 img.center {
@@ -515,11 +516,11 @@ body {
 
 .view-main .navbar {
   background: #9C27B0;
-  color: #fff;
+  color: white;
 }
 
-i, icon {
-  color: #fff;
+i, .icon, .icon-back {
+  color: white;
 }
 
 .white {

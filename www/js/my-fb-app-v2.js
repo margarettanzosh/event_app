@@ -103,14 +103,14 @@ function refreshUI(list) {
         ' </div></a>' +
         '<div class="accordion-item-content">' +
         '  <div class="block">' +
-        '   <p style="margin: 1px 0;">' + list[month % 12][i].description + '</p>' + 
-        '   <p style="margin: 1px 0;">' + list[month % 12][i].club + '</p>' + 
-        '   <p style="margin: 1px 0;">' + list[month % 12][i].time + roomInfo + '</p>' + 
-        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #9400D3;" class="link external" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
+        '   <p style="margin: 1px 0;">' + list[month % 12][i].description + '</p>' +
+        '   <p style="margin: 1px 0;">' + list[month % 12][i].club + '</p>' +
+        '   <p style="margin: 1px 0;">' + list[month % 12][i].time + roomInfo + '</p>' +
+        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #9C27B0;" class="external" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
         ' </div>' +
         '</div>' +
         '</li>';
-      
+
     };
     lis += '</ul>'
     cbt += lis + '</div></div>';

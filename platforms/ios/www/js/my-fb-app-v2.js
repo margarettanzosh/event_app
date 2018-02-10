@@ -86,6 +86,16 @@ function refreshUI(list) {
     var lis = '<ul>';
     for (var i = 0; i < list[month % 12].length; i++) {
       var longDateStr = moment(list[month % 12][i].date, 'Y-M-D').format('dddd MMM D');
+      var roomInfo = "";
+      var emailInfo = "";
+      if (list[month % 12][i].room)
+      {
+        roomInfo = ", Room " + list[month % 12][i].room;
+      }
+      if (list[month % 12][i].email)
+      {
+        emailInfo = "Contact: ";
+      }
       // console.log(longDateStr);
       lis += '<li class="accordion-item"><a href="#" class="item-content item-link">' +
         ' <div class="item-inner">' +
@@ -93,10 +103,14 @@ function refreshUI(list) {
         ' </div></a>' +
         '<div class="accordion-item-content">' +
         '  <div class="block">' +
-        '   <p>' + list[month % 12][i].description + '</p>' +
+        '   <p style="margin: 1px 0;">' + list[month % 12][i].description + '</p>' +
+        '   <p style="margin: 1px 0;">' + list[month % 12][i].club + '</p>' +
+        '   <p style="margin: 1px 0;">' + list[month % 12][i].time + roomInfo + '</p>' +
+        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #9C27B0;" class="external" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
         ' </div>' +
         '</div>' +
         '</li>';
+
     };
     lis += '</ul>'
     cbt += lis + '</div></div>';
