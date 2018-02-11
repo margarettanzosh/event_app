@@ -106,7 +106,7 @@ function refreshUI(list) {
         '   <p style="margin: 1px 0;">' + list[month % 12][i].description + '</p>' +
         '   <p style="margin: 1px 0;">' + list[month % 12][i].club + '</p>' +
         '   <p style="margin: 1px 0;">' + list[month % 12][i].time + roomInfo + '</p>' +
-        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #9C27B0;" class="external" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
+        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #9C27B0;" class="external" target="_system" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
         ' </div>' +
         '</div>' +
         '</li>';
