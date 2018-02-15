@@ -31,6 +31,12 @@ var routes = [
     componentUrl: './pages/profile.html',
 
   },
+  // Settings added by will
+  {
+    path: '/setting/',
+    url: './pages/setting.html',
+  
+  },
   
   // Update user name - Added
   {
