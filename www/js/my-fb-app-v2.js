@@ -1,4 +1,4 @@
-var monthName = ["January", "Februrary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 function eventAdd() {
   var name = $$('#name').val();
@@ -88,15 +88,20 @@ function refreshUI(list) {
       var longDateStr = moment(list[month % 12][i].date, 'Y-M-D').format('dddd MMM D');
       var roomInfo = "";
       var emailInfo = "";
+      var comma = "";
       if (list[month % 12][i].room)
       {
-        roomInfo = ", Room " + list[month % 12][i].room;
+        roomInfo = "Room " + list[month % 12][i].room;
       }
       if (list[month % 12][i].email)
       {
         emailInfo = "Contact: ";
       }
-      // console.log(longDateStr);
+      if (list[month % 12][i].email && list[month % 12][i].time)
+      {
+        comma = ", ";
+      }
+      console.log(longDateStr);
       lis += '<li class="accordion-item"><a href="#" class="item-content item-link">' +
         ' <div class="item-inner">' +
         '   <div class="item-title"><small>' + longDateStr + '</small></br> <b><span class="title">' + list[month % 12][i].name + '</span> </b></div>' +
@@ -105,7 +110,7 @@ function refreshUI(list) {
         '  <div class="block">' +
         '   <p style="margin: 1px 0;">' + list[month % 12][i].description + '</p>' +
         '   <p style="margin: 1px 0;">' + list[month % 12][i].club + '</p>' +
-        '   <p style="margin: 1px 0;">' + list[month % 12][i].time + roomInfo + '</p>' +
+        '   <p style="margin: 1px 0;">' + list[month % 12][i].time + comma + roomInfo + '</p>' +
         '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #9C27B0;" class="external" target="_system" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
         ' </div>' +
         '</div>' +
@@ -123,7 +128,7 @@ function refreshUI(list) {
   var searchbar = app.searchbar.create({
     el: '.searchbar',
     searchContainer: '.components-list',
-    searchIn: 'a',
+    searchIn: 'li',
     on: {
       search(sb, query, previousQuery) {
         console.log(query, previousQuery);
