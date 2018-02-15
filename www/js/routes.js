@@ -69,7 +69,7 @@ var routes = [
   // Add/Edit Clubs page - Added
   {
     path: '/add-edit-clubs/',
-    url: './pages/add-edit-clubs.html',
+    componentUrl: './pages/add-edit-clubs.html',
   },
   
   // About page
