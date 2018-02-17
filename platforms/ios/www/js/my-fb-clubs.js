@@ -1,21 +1,19 @@
 function clubAdd() {
-  var name = $$('#name').val();
-  var leader = $$("#leader").val();
-  var room  = $$('#room').val();
-  var email = $$('#email').val();
-  
-  }
-  
+  var club_name = $$('#clubname').val();
+  var club_description = $$("#clubdesc").val();
+  var club_room  = $$('#clubroom').val();
+  var club_email = $$('#clubemail').val();
+
   // check that date and name entered
-  if (!name || !email) {
-    alert("Enter a name and email!");
+  if (!club_name || !club_email) {
+    alert("Enter a club name and email!");
   }
   else {
     // add to DB here
-    saveClub(name, leader, room, email);
+    saveClub(club_name, club_description, club_room, club_email);
     console.log("Club added!");
   }
-  
+
 };
 
 function clubRemove(key) {
@@ -25,101 +23,93 @@ function clubRemove(key) {
 
 // adds existing values to form
 function clubUpdate(key) {
-  myApp.router.navigate('/update-club/' + key);
+  app.router.navigate('/update-club/' + key);
 };
 
 
-function saveClub(name, leader, room, email ) {
+function saveClub(club_name, club_description, club_room, club_email ) {
   // this will save data to Firebase
-  eventsRef.push({
-    name: name,
-    leader: leader,
-    room: room,
-    email: email
+  clubsRef.push({
+    club_name: club_name,
+    club_description: club_description,
+    club_room: club_room,
+    club_email: club_email
   });
 };
 
-// swipeout for events or delete event
+// swipeout for clubs or delete clubs
 function refreshClubEdit(clist) {
   var clis = '<ul>';
-  for (var i = 0; i < elist.length; i++) {
+  for (var i = 0; i < clist.length; i++) {
 
 
-    elis += '<li class = "swipeout">' +
+    clis += '<li class = "swipeout">' +
       '<div class="swipeout-content">' +
 
-      ' <div class="item-inner margin-left">'  + elist[i].name + ' </div>' +
+      ' <div class="item-inner margin-left">'  + clist[i].club_name + ' </div>' +
 
       ' </div>' +
       '<div class="swipeout-actions-right">' +
-      ' <a href="#" class="color-orange" onclick=clubUpdate("' + elist[i].key + '");>Edit</a>' +
+      ' <a href="#" class="color-orange" onclick=clubUpdate("' + clist[i].key + '");>Edit</a>' +
 
-      ' <a href="#" class="swipeout-delete" onclick=clubRemove("' + elist[i].key + '");>Delete</a></div>' +
+      ' <a href="#" class="swipeout-delete" onclick=clubRemove("' + clist[i].key + '");>Delete</a></div>' +
       '</li>';
   };
-
-
   clis += '</ul>'
-  // console.log(elis);
+  // console.log(clis);
   $$('#clubEditList').html(clis);
 };
 
 
 
   // console.log(lis);
-  $$('#eventsID').html(cbt);
-  
+  // $$('#clubsID').html(cbt);
+
   // create searchbar
-  var searchbar = myApp.searchbar.create({
-    el: '.searchbar',
-    searchContainer: '.components-list',
-    searchIn: 'a',
-    on: {
-      search(sb, query, previousQuery) {
-        console.log(query, previousQuery);
-      }
-    }
-  });
-};
+  // var searchbar = app.searchbar.create({
+  //   el: '.searchbar',
+  //   searchContainer: '.components-list',
+  //   searchIn: 'a',
+  //   on: {
+  //     search(sb, query, previousQuery) {
+  //       console.log(query, previousQuery);
+  //     }
+  //   }
+  // });
 
 function getClubsByKey() {
   //  this will get fired on inital load as well as when ever there is a change in the data
   clubsRef.on("value", function(snapshot) {
     var data = snapshot.val();
-    var elist = [];
+    var clist = [];
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
-        name = data[key].name ? data[key].name : '';
-        date = data[key].date;
-        if (name.trim().length > 0) {
-          elist.push({
+        // name = data[key].name ? data[key].name : '';
+        // if (name.trim().length > 0) {
+          clist.push({
             key: key,
-            name: name,
-            club: data[key].club,
-            room: data[key].room,
+            club_name: data[key].club_name,
+            club_description: data[key].club_description,
+            room_number: data[key].room_number,
             email: data[key].email,
            })
-        }
+        // }
       }
     }
-    refreshClubEdit(elist);
+    refreshClubEdit(clist);
   })
 
 }
 
-function getClubs() {
-  var options = [];
-  clubsRef.on("value", function(snapshot) {
-    var data = snapshot.val();
+// function getClubs() {
+//   var options = [];
+//   clubsRef.on("value", function(snapshot) {
+//     var data = snapshot.val();
 
-    for (var key in data) {
-      options.push(data[key].club_name);
-    }
-    console.log(options);
-  })
-  return options;
-}
-
-
-
-
+//     for (var key in data) {
+//       options.push(data[key].club_name);
+//     }
+//     console.log(options);
+//   })
+//   return options;
+// }

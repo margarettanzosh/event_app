@@ -72,7 +72,7 @@
 });
 
   $$(document).on('page:init', '.page[data-name="index"]', function (e) {
-    getEventsByMonth();
+    refreshEventPage();
   })
 
   $$(document).on('page:init', '.page[data-name="profile"]', function (e) {

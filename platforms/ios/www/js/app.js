@@ -81,7 +81,7 @@ var authorizationScreen = app.popup.create({
       console.log('Authorization Screen opened')
     },
     closed: function() {
-      getEventsByMonth();
+      refreshEventPage();
     }
   }
 })

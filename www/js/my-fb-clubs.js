@@ -1,19 +1,19 @@
 function clubAdd() {
-  var name = $$('#name').val();
-  var leader = $$("#leader").val();
-  var room  = $$('#room').val();
-  var email = $$('#email').val();
-  
+  var club_name = $$('#clubname').val();
+  var club_description = $$("#clubdesc").val();
+  var club_room  = $$('#clubroom').val();
+  var club_email = $$('#clubemail').val();
+
   // check that date and name entered
-  if (!name || !email) {
-    alert("Enter a name and email!");
+  if (!club_name || !club_email) {
+    alert("Enter a club name and email!");
   }
   else {
     // add to DB here
-    saveClub(name, leader, room, email);
+    saveClub(club_name, club_description, club_room, club_email);
     console.log("Club added!");
   }
-  
+
 };
 
 function clubRemove(key) {
@@ -23,17 +23,17 @@ function clubRemove(key) {
 
 // adds existing values to form
 function clubUpdate(key) {
-  myApp.router.navigate('/update-club/' + key);
+  app.router.navigate('/update-club/' + key);
 };
 
 
-function saveClub(name, leader, room, email ) {
+function saveClub(club_name, club_description, club_room, club_email ) {
   // this will save data to Firebase
   clubsRef.push({
-    name: name,
-    leader: leader,
-    room: room,
-    email: email
+    club_name: club_name,
+    club_description: club_description,
+    club_room: club_room,
+    club_email: club_email
   });
 };
 
@@ -46,7 +46,7 @@ function refreshClubEdit(clist) {
     clis += '<li class = "swipeout">' +
       '<div class="swipeout-content">' +
 
-      ' <div class="item-inner margin-left">'  + clist[i].name + ' </div>' +
+      ' <div class="item-inner margin-left">'  + clist[i].club_name + ' </div>' +
 
       ' </div>' +
       '<div class="swipeout-actions-right">' +
@@ -64,7 +64,7 @@ function refreshClubEdit(clist) {
 
   // console.log(lis);
   // $$('#clubsID').html(cbt);
-  
+
   // create searchbar
   // var searchbar = app.searchbar.create({
   //   el: '.searchbar',
@@ -113,7 +113,3 @@ function getClubsByKey() {
 //   })
 //   return options;
 // }
-
-
-
-

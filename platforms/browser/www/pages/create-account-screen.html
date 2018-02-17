@@ -18,7 +18,7 @@
               </li>
             </ul>
           </div>
-          
+
           <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: .5;">
             <ul style="background-color: white;  border-radius: 5px;" class="center">
               <li class="item-content item-input">
@@ -46,7 +46,7 @@
               </li>
             </ul>
           </div>
-          
+
           <div class="list inset" style="padding: 20px 20px 0px 20px; margin: auto; opacity: 0.5;">
             <ul style="background-color: white; border-radius: 5px;">
               <li class="item-content item-input">
@@ -60,17 +60,17 @@
               </li>
             </ul>
           </div>
-          
+
           <div class="block inset">
             <p><a href="#" id="quickstart-sign-in" style="margin: 0 5px;" onclick="handleSignUp()" class="item-link button button-big color-white">Create Account</a></p>
           </div>
-          
+
           <div class="list">
             <div style="text-align: center; margin-top: 100px">
               <a href="/login-screen/" style="color: white; margin: 5px;" class="center-white">Cancel</a></p>
             </div>
           </div>
-          
+
       </form>
     </div>
   </div>
@@ -80,7 +80,7 @@
   return {
     on: {
       pageAfterOut: function() {
-        getEventsByMonth();
+        refreshEventPage();
       }
     }
   }

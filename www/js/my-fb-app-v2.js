@@ -111,7 +111,7 @@ function refreshUI(list) {
         '   <p style="margin: 1px 0;">' + list[month % 12][i].description + '</p>' +
         '   <p style="margin: 1px 0;">' + list[month % 12][i].club + '</p>' +
         '   <p style="margin: 1px 0;">' + list[month % 12][i].time + comma + roomInfo + '</p>' +
-        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #9C27B0;" class="external" target="_system" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
+        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #7B1FA2;" class="external" target="_system" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
         ' </div>' +
         '</div>' +
         '</li>';
@@ -181,8 +181,6 @@ function getClubs() {
 }
 
 
-
-
 function getEventsByMonth() {
 
   // validate that user is logged in
@@ -248,4 +246,167 @@ function getEventsByMonth() {
 
 }
 
-getEventsByMonth();
+// organize events page by club
+function getEventsByClub() {
+  // validate that user is logged in
+  initApp();
+
+  var clubList = {};
+
+  clubsRef.on("value", function(club_snapshot) {
+    var data = club_snapshot.val();
+    for (var key in data) {
+      clubList[data[key].club_name] = {
+        // club_name: data[key].club_name,
+        club_events: []
+      }
+    }
+
+  // get clubs
+  console.log(clubList)
+
+  eventsRef.orderByChild("date").on("child_added", function(snapshot) {
+    var data = snapshot.val();
+    date = data["date"];
+
+    // eventKey = data["club"];
+    var month = eventMonth(date) - 1;
+    if (date >= todayDate() && month >= 0 && month <= 11) {
+
+      if (typeof clubList[data.club]=== 'undefined'){
+        clubList[data["club"]] = {club_events: []}
+      }
+
+      clubList[data["club"]].club_events.push({
+
+        name: data["name"],
+        date: data["date"],
+        club: data["club"],
+        description: data["description"],
+        email: data["email"],
+        room: data["room"],
+        time: data["time"]
+      })
+    }
+
+
+    function todayDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      var todayDate = yyyy + '-' + mm + '-' + dd;
+      return todayDate;
+    }
+
+    function eventMonth(date) {
+      month = date.substring(5, 7);
+      return month;
+    }
+
+    function eventDay(date) {
+      day = date.substring(8, 9);
+      return day;
+    }
+
+    function eventYear(date) {
+      year = date.substring(0, 4);
+      return year;
+    }
+
+    // refresh the UI
+    refreshUIByClub(clubList);
+  });
+  })
+}
+
+function refreshUIByClub(clubList) {
+  var cbt = "";
+  var events;
+  var thisMonth = new Date().getMonth();
+  // for (var month = thisMonth; month < thisMonth + 3; month++) {
+    for (club in clubList) {
+
+    cbt +=  '<div class="block-title searchbar-found">' + club + '</div>' +
+            '<div class="list components-list searchbar-found">';
+
+    events = clubList[club].club_events;
+
+    var lis = '<ul>';
+    for (var i = 0; i < events.length; i++) {
+      var longDateStr = moment(events[i].date, 'Y-M-D').format('dddd MMM D');
+      var roomInfo = "";
+      var emailInfo = "";
+      var comma = "";
+      if (events[i].room)
+      {
+        roomInfo = "Room " + events[i].room;
+      }
+      if (events[i].email)
+      {
+        emailInfo = "Contact: ";
+      }
+      if (events[i].email && events[i].time)
+      {
+        comma = ", ";
+      }
+      // console.log(longDateStr);
+      lis += '<li class="accordion-item"><a href="#" class="item-content item-link">' +
+        ' <div class="item-inner">' +
+        '   <div class="item-title"><small>' + longDateStr + '</small></br> <b><span class="title">' + events[i].name + '</span> </b></div>' +
+        ' </div></a>' +
+        '<div class="accordion-item-content">' +
+        '  <div class="block">' +
+        '   <p style="margin: 1px 0;">' + events[i].description + '</p>' +
+        '   <p style="margin: 1px 0;">' + events[i].club + '</p>' +
+        '   <p style="margin: 1px 0;">' + events[i].time + comma + roomInfo + '</p>' +
+        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #7B1FA2;" class="external" target="_system" href="mailto:' + events[i].email + '">' + events[i].email + '</a></p>'
+        ' </div>' +
+        '</div>' +
+        '</li>';
+
+    };
+    if (!events.length) {
+      lis += '<li class="searchbar-hide-on-search" style="padding: 15px;">No Events</li>'
+    }
+
+    lis += '</ul>'
+
+    cbt += lis + '</div></div>';
+  }
+
+  $$('#eventsID').html(cbt);
+
+  // create searchbar
+  var searchbar = app.searchbar.create({
+    el: '.searchbar',
+    searchContainer: '.components-list',
+    searchIn: 'li',
+    on: {
+      search(sb, query, previousQuery) {
+        console.log(query, previousQuery);
+      }
+    }
+  });
+
+  // app.statusbar.show()
+  // app.statusbar.iosOverlaysWebView(true)
+};
+
+function refreshEventPage() {
+  if (typeof app.form.getFormData('settings-form')['view-by'] !== 'undefined' &&
+    app.form.getFormData('settings-form')['view-by'] === 'club') {
+      getEventsByClub()
+    } else {
+      getEventsByMonth();
+    }
+}
+
+refreshEventPage()

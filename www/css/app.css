@@ -501,12 +501,13 @@ a.hidden {
 body {
  padding-top: constant(safe-area-inset-top);  /* iOS 11.0 */
  padding-top: env(safe-area-inset-top); /* iOS 11.2 */
- background-color: #9C27B0;
+ /* background-color: #9C27B0; */
+ background-color: #7B1FA2;
  color: white;
 }
 
 .statusbar {
-  background-color: #9C27B0;
+  background-color: #7B1FA2;
   color: white;
 }
 
@@ -515,7 +516,7 @@ body {
 }
 
 .view-main .navbar {
-  background: #9C27B0;
+  background-color: #7B1FA2;
   color: white;
 }
 

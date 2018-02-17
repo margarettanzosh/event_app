@@ -5,73 +5,92 @@ var routes = [
     url: './index.html',
     name: 'index',
   },
-  
+
   // // Login page - Added
   // {
   //   path: '/login-screen/',
   //   componentUrl: './pages/login-screen-page.html',
 
   // },
-  
+
   // // Create Account - Added
   // {
   //   path: '/create-account-screen/',
   //   componentUrl: './pages/create-account-screen.html',
   // },
-  
+
   // // Authorization screen - Added
   // {
   //   path: '/authorization-screen/',
   //   url: './pages/authorization-screen.html',
   // },
-  
+
   // Profile page - Added
   {
     path: '/profile/',
     componentUrl: './pages/profile.html',
 
   },
-  
+  // Settings added by will
+  {
+    path: '/setting/',
+    url: './pages/setting.html',
+
+  },
+
   // Update user name - Added
   {
     path: '/update-user/',
     componentUrl: './pages/update-user.html',
 
   },
-  
+
   // Admin page - Added
   {
     path: '/admin/',
     componentUrl: './pages/admin.html',
 
   },
-  
+
   // Add/Edit Events page - Added
   {
     path: '/add-edit-events/',
     componentUrl: './pages/add-edit-events.html',
   },
-  
+
   // Add Event page - Added
   {
     path: '/add-event/',
     componentUrl: './pages/add-event.html',
   },
-  
+
    // Update Event page - Added
   {
     // path: '/update-event/:key/',
     path: '/update-event/:key',
     componentUrl: './pages/update-event.html',
   },
-  
-  
+
+
   // Add/Edit Clubs page - Added
   {
     path: '/add-edit-clubs/',
-    url: './pages/add-edit-clubs.html',
+    componentUrl: './pages/add-edit-clubs.html',
   },
-  
+
+  // Update Club page - Added
+ {
+   // path: '/update-event/:key/',
+   path: '/update-club/:key',
+   componentUrl: './pages/update-club.html',
+ },
+
+  // Add page - Added
+  {
+    path: '/add-club/',
+    componentUrl: './pages/add-club.html',
+  },
+
   // About page
   {
     path: '/about/',
@@ -534,4 +553,3 @@ var routes = [
     url: './pages/404.html',
   },
 ];
-
