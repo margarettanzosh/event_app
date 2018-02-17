@@ -53,27 +53,34 @@ function saveToFB(name, date, club, desc, email, time, room) {
 
 // swipeout for events or delete event
 function refreshEventEdit(elist) {
-  var elis = '<ul>';
-  for (var i = 0; i < elist.length; i++) {
+  var clublis = '';
+  for (club in elist) {
+    clublis +=  '<div class="block-header" style="text-transform: uppercase;">' + club + '</div>' +
+            '<div class="list components-list">';
+    elis = '<ul>'
+    var events = elist[club];
 
+    for (var i = 0; i < events.length; i++) {
 
+      var longDateStr = moment(events[i].date, 'Y-M-D').format('ddd MMM D');
+      elis += '<li class = "swipeout">' +
+        '<div class="swipeout-content">' +
 
-    var longDateStr = moment(elist[i].date, 'Y-M-D').format('ddd MMM D');
-    elis += '<li class = "swipeout">' +
-      '<div class="swipeout-content">' +
+        ' <div class="item-inner margin-left">' + longDateStr + ':  ' + events[i].name + ' </div>' +
 
-      ' <div class="item-inner margin-left">' + longDateStr + ':  ' + elist[i].name + ' </div>' +
+        ' </div>' +
+        '<div class="swipeout-actions-right">' +
+        ' <a href="#" class="color-orange" onclick=eventUpdate("' + events[i].key + '");>Edit</a>' +
 
-      ' </div>' +
-      '<div class="swipeout-actions-right">' +
-      ' <a href="#" class="color-orange" onclick=eventUpdate("' + elist[i].key + '");>Edit</a>' +
-
-      ' <a href="#" class="swipeout-delete" onclick=eventRemove("' + elist[i].key + '");>Delete</a></div>' +
-      '</li>';
-  };
-  elis += '</ul>'
+        ' <a href="#" class="swipeout-delete" onclick=eventRemove("' + events[i].key + '");>Delete</a></div>' +
+        '</li>';
+    };
+    elis += '</ul>'
+    clublis += elis + '</div></div>'
+  }
+  // elis += '</ul>'
   // console.log(elis);
-  $$('#eventEditList').html(elis);
+  $$('#eventEditList').html(clublis);
 };
 
 function refreshUI(list) {
@@ -139,32 +146,35 @@ function refreshUI(list) {
   // app.statusbar.iosOverlaysWebView(true)
 };
 
+
 function getEventsByKey() {
   //  this will get fired on inital load as well as when ever there is a change in the data
   eventsRef.on("value", function(snapshot) {
     var data = snapshot.val();
-    var elist = [];
+    var elist = {};
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
         name = data[key].name ? data[key].name : '';
         date = data[key].date;
-        if (name.trim().length > 0) {
-          elist.push({
+        club = data[key].club;
+        // if (name.trim().length > 0) {
+        if (typeof elist[club] === 'undefined') {
+          elist[club] = [];
+        }
+          elist[club].push({
             key: key,
             name: name,
             date: date,
-            club: data[key].club,
+            club: club,
             description: data[key].description,
             room: data[key].room,
             email: data[key].email,
             time: data[key].time
           })
-        }
       }
     }
     refreshEventEdit(elist);
   })
-
 }
 
 function getClubs() {

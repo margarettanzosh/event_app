@@ -17,7 +17,7 @@ function toggleSignIn() {
   // Sign in with email and pass.
   // [START authwithemail]
   firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-    getEventsByMonth();
+    refreshEventPage();
     app.router.navigate('/');
 
   }).catch(function(error) {
@@ -105,6 +105,7 @@ function sendEmailVerification() {
     // Email Verification sent!
     // [START_EXCLUDE]
     console.log('Email Verification Sent!');
+    app.dialog.confirm('Email Authorication Sent', 'NEST+m Event Tracker')
     // [END_EXCLUDE]
   });
   // [END sendemailverification]
@@ -148,9 +149,9 @@ function initApp() {
       // User is signed in.
       console.log("signed in");
       app.user = user;
-      
+
       var admin = ['QyZRt0iucVZOZGIp1ZdAGaLpI1p2', 'j57jeOfjm8WdkeNDM4hm5uHdojt2', '9wa5aLywAQWgAlvUD8v2ySENGYS2', 'uUIJbVNuNzWpc8pRmkH3e2wwQQU2', 'y0DDHJsN7pMYUZCoe76fOVV6erF3', 'M2t8x0eviMelteFA1ZZe3t92TQE2'];
-      
+
       if (admin.includes(user.uid)) {
         app.user.admin = true;
       } else {
@@ -160,9 +161,15 @@ function initApp() {
       loginScreen.close({
         animate: true
       });
-      
+
       if (!app.user.emailVerified) {
         console.log("email not verified");
+        authorizationScreen.open({
+            animate: true
+          });
+      }
+      else {
+        console.log("email authorized");
       }
       // [END_EXCLUDE]
     }
@@ -218,11 +225,9 @@ function initApp() {
 // }
 
 function continueIndex() {
-  getEventsByMonth();
-  // mainView.router.loadPage("index.html");
-  authorizationScreen.close({
-    animate: true
-  });
+  loginScreen.open({
+      animate: true
+    });
 }
 
 function confirmOk() {

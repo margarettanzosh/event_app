@@ -39,15 +39,18 @@ var app = new Framework7({
   statusbar: {
     enabled: true,
     iosTextColor: 'white',
-    iosBackgroundColor: '#9C27B0'
+    iosBackgroundColor: '#7B1FA2'
   },
+  panel: {
+     swipe: 'left',
+   },
   // vi: {
   //   placementId: 'pltd4o7ibb9rc653x14',
   // },
 });
 
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
-  getEventsByMonth();
+  refreshEventPage();
 })
 
 $$(document).on('page:init', '.page[data-name="profile"]', function (e) {
@@ -61,6 +64,8 @@ var loginScreen = app.loginScreen.create({
   on: {
     opened: function () {
       console.log('Login Screen opened')
+      $$('#email').val("");
+      $$('#password').val("");
     }
   }
 })
@@ -80,8 +85,8 @@ var authorizationScreen = app.popup.create({
     opened: function () {
       console.log('Authorization Screen opened')
     },
-    closed: function() {
-      refreshEventPage();
-    }
+    // closed: function() {
+    //   refreshEventPage();
+    // }
   }
 })
