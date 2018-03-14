@@ -14,3 +14,5 @@ console.log("eventsRef: " + eventsRef);
 var clubsRef = db.ref("clubs");
 console.log("eventsRef: " + clubsRef);
 
+var myEventsRef = db.ref("myevents");
+console.log("myeventsRef: " + myEventsRef)

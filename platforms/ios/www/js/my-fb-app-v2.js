@@ -51,6 +51,28 @@ function saveToFB(name, date, club, desc, email, time, room) {
   });
 };
 
+function saveToMyEvents(uid, eventkey) {
+  myEvents = [];
+  myEventsRef.orderByKey().equalTo(uid).limitToFirst(1).on("child_added", function(snapshot) {
+    var eventData = snapshot.val();
+    // debugger;
+    for (var key in eventData) {
+      console.log('Event Key:' + eventData[key].eventkey)
+      myEvents.push(eventData[key].eventkey)
+    }
+    if (myEvents.includes(eventkey)) {
+        app.dialog.alert("You've already saved this event!")
+    }
+    else {
+      db.ref('myevents/' + uid).push({
+        eventkey
+      })
+      app.dialog.alert('Event Added');
+    }
+  })
+}
+
+
 // swipeout for events or delete event
 function refreshEventEdit(elist) {
   var clublis = '';
@@ -288,7 +310,7 @@ function getEventsByClub() {
       }
 
       clubList[data["club"]].club_events.push({
-
+        key: snapshot.key, // undefined?
         name: data["name"],
         date: data["date"],
         club: data["club"],
@@ -367,19 +389,24 @@ function refreshUIByClub(clubList) {
       {
         comma = ", ";
       }
-      // console.log(longDateStr);
-      lis += '<li class="accordion-item"><a href="#" class="item-content item-link">' +
-        ' <div class="item-inner">' +
+      var stme = "saveToMyEvents('" + app.user.uid + "','" + events[i].key + "')"
+      // console.log(stme)
+      lis += '<li class="accordion-item swipeout"><a href="#" class="item-content item-link">' +
+        ' <div class="item-inner swipeout-content">' +
         '   <div class="item-title"><small>' + longDateStr + '</small></br> <b><span class="title">' + events[i].name + '</span> </b></div>' +
         ' </div></a>' +
+
         '<div class="accordion-item-content">' +
         '  <div class="block">' +
         '   <p style="margin: 1px 0;">' + events[i].description + '</p>' +
         '   <p style="margin: 1px 0;">' + events[i].club + '</p>' +
         '   <p style="margin: 1px 0;">' + events[i].time + comma + roomInfo + '</p>' +
-        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #7B1FA2;" class="external" target="_system" href="mailto:' + events[i].email + '">' + events[i].email + '</a></p>'
+        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #7B1FA2;" class="external" target="_system" href="mailto:' + events[i].email + '">' + events[i].email + '</a></p>' +
         ' </div>' +
         '</div>' +
+        '<div class="swipeout-actions-right">' +
+        '   <a class="color-blue" href="#" onclick=' + stme + '>Add to My Events</a>' +
+        '</div>'
         '</li>';
 
     };
