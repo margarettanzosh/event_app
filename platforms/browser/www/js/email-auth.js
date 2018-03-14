@@ -147,7 +147,7 @@ function initApp() {
 
     if (user) {
       // User is signed in.
-      console.log("signed in");
+      console.log("user: " + user.uid);
       app.user = user;
 
       var admin = ['QyZRt0iucVZOZGIp1ZdAGaLpI1p2', 'j57jeOfjm8WdkeNDM4hm5uHdojt2', '9wa5aLywAQWgAlvUD8v2ySENGYS2', 'uUIJbVNuNzWpc8pRmkH3e2wwQQU2', 'y0DDHJsN7pMYUZCoe76fOVV6erF3', 'M2t8x0eviMelteFA1ZZe3t92TQE2', 'ZXjYu5w3vJVCFK2tIpnQLGet1IV2'];

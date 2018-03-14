@@ -52,6 +52,20 @@ var routes = [
 
   },
 
+  // My Events page - Added
+  {
+    path: '/myevents/',
+    componentUrl: './pages/my-events.html',
+
+  },
+
+  // My Event View - Added
+ {
+   // path: '/update-event/:key/',
+   path: '/view-my-event/:key',
+   componentUrl: './pages/view-my-event.html',
+ },
+
   // Add/Edit Events page - Added
   {
     path: '/add-edit-events/',
@@ -70,6 +84,10 @@ var routes = [
     path: '/update-event/:key',
     componentUrl: './pages/update-event.html',
   },
+
+
+
+
 
 
   // Add/Edit Clubs page - Added
