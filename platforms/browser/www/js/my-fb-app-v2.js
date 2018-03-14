@@ -60,7 +60,7 @@ function saveToMyEvents(uid, eventkey) {
       console.log('Event Key:' + eventData[key].eventkey)
       myEvents.push(eventData[key].eventkey)
     }
-    if (myEvents.includes(eventkey)) {
+    if (myEvents.includes(eventkey) && myEvents.length) {
         app.dialog.alert("You've already saved this event!")
     }
     else {
@@ -70,6 +70,12 @@ function saveToMyEvents(uid, eventkey) {
       app.dialog.alert('Event Added');
     }
   })
+  if (myEvents.length == 0) {
+    db.ref('myevents/' + uid).push({
+      eventkey
+    })
+    app.dialog.alert('Event Added');
+  }
 }
 
 
