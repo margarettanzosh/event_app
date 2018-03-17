@@ -52,15 +52,18 @@ function saveToFB(name, date, club, desc, email, time, room) {
 };
 
 function saveToMyEvents(uid, eventkey) {
-  myEvents = [];
-  myEventsRef.orderByKey().equalTo(uid).limitToFirst(1).on("child_added", function(snapshot) {
+  var myEvents = [];
+
+  let myRef = db.ref('myevents/' + uid);
+  myRef.once("value").then(function(snapshot) {
     var eventData = snapshot.val();
+
     // debugger;
     for (var key in eventData) {
       console.log('Event Key:' + eventData[key].eventkey)
       myEvents.push(eventData[key].eventkey)
     }
-    if (myEvents.includes(eventkey) && myEvents.length) {
+    if (myEvents.includes(eventkey)) {
         app.dialog.alert("You've already saved this event!")
     }
     else {
@@ -70,12 +73,20 @@ function saveToMyEvents(uid, eventkey) {
       app.dialog.alert('Event Added');
     }
   })
-  if (myEvents.length == 0) {
-    db.ref('myevents/' + uid).push({
-      eventkey
-    })
-    app.dialog.alert('Event Added');
-  }
+}
+
+function deleteFromMyEvents(uid, key) {
+  let myRef = db.ref('myevents/' + uid);
+  myRef.child(key).remove();
+  app.dialog.alert('Event Deleted!');
+  console.log("Event Deleted!");
+  // app.router.navigate('/myevents/', 'reloadCurrent');
+  // debugger;
+  // app.router.refreshPage('/myevents/');
+//   app.router.navigate("./pages/my-events.html", {
+//   reloadCurrent: true,
+//   ignoreCache: true,
+// });
 }
 
 
@@ -136,20 +147,43 @@ function refreshUI(list) {
       {
         comma = ", ";
       }
-      console.log(longDateStr);
-      lis += '<li class="accordion-item"><a href="#" class="item-content item-link">' +
-        ' <div class="item-inner">' +
-        '   <div class="item-title"><small>' + longDateStr + '</small></br> <b><span class="title">' + list[month % 12][i].name + '</span> </b></div>' +
-        ' </div></a>' +
-        '<div class="accordion-item-content">' +
-        '  <div class="block">' +
-        '   <p style="margin: 1px 0;">' + list[month % 12][i].description + '</p>' +
-        '   <p style="margin: 1px 0;">' + list[month % 12][i].club + '</p>' +
-        '   <p style="margin: 1px 0;">' + list[month % 12][i].time + comma + roomInfo + '</p>' +
-        '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #7B1FA2;" class="external" target="_system" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
-        ' </div>' +
-        '</div>' +
-        '</li>';
+      // console.log(longDateStr);
+      // lis += '<li class="accordion-item"><a href="#" class="item-content item-link">' +
+      //   ' <div class="item-inner">' +
+      //   '   <div class="item-title"><small>' + longDateStr + '</small></br> <b><span class="title">' + list[month % 12][i].name + '</span> </b></div>' +
+      //   ' </div></a>' +
+      //   '<div class="accordion-item-content">' +
+      //   '  <div class="block">' +
+      //   '   <p style="margin: 1px 0;">' + list[month % 12][i].description + '</p>' +
+      //   '   <p style="margin: 1px 0;">' + list[month % 12][i].club + '</p>' +
+      //   '   <p style="margin: 1px 0;">' + list[month % 12][i].time + comma + roomInfo + '</p>' +
+      //   '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #7B1FA2;" class="external" target="_system" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'
+      //   ' </div>' +
+      //   '</div>' +
+      //   '</li>';
+
+        // add myEvents
+        var stme = "saveToMyEvents('" + app.user.uid + "','" + list[month % 12][i].key + "')"
+
+        lis += '<li class="accordion-item swipeout"><a href="#" class="item-content item-link">' +
+          ' <div class="item-inner swipeout-content">' +
+          '   <div class="item-title"><small>' + longDateStr + '</small></br> <b><span class="title">' + list[month % 12][i].name + '</span> </b></div>' +
+          ' </div></a>' +
+
+          '<div class="accordion-item-content">' +
+          '  <div class="block">' +
+          '   <p style="margin: 1px 0;">' + list[month % 12][i].description + '</p>' +
+          '   <p style="margin: 1px 0;">' + list[month % 12][i].club + '</p>' +
+          '   <p style="margin: 1px 0;">' + list[month % 12][i].time + comma + roomInfo + '</p>' +
+          '   <p style="margin: 1px 0;">' + emailInfo + '<a style="color: #7B1FA2;" class="external" target="_system" href="mailto:' + list[month % 12][i].email + '">' + list[month % 12][i].email + '</a></p>'+
+          ' </div>' +
+          '</div>' +
+          '<div class="swipeout-actions-right">' +
+          '   <a class="color-blue" href="#" onclick=' + stme + '>Add to My Events</a>' +
+          '</div>'
+          '</li>';
+
+        // end changes
 
     };
     lis += '</ul>'
@@ -161,7 +195,7 @@ function refreshUI(list) {
 
   // create searchbar
   var searchbar = app.searchbar.create({
-    el: '.searchbar',
+    el: '.searchbar-1',
     searchContainer: '.components-list',
     searchIn: 'li',
     on: {
@@ -235,6 +269,7 @@ function getEventsByMonth() {
     var month = eventMonth(date) - 1;
     if (date >= todayDate() && month >= 0 && month <= 11) {
       list[month].push({
+        key: snapshot.key,
         name: data["name"],
         date: data["date"],
         club: data["club"],
@@ -279,7 +314,6 @@ function getEventsByMonth() {
 
     // refresh the UI
     refreshUI(list);
-    // console.log(list);
   });
 
 }
@@ -429,7 +463,7 @@ function refreshUIByClub(clubList) {
 
   // create searchbar
   var searchbar = app.searchbar.create({
-    el: '.searchbar',
+    el: '.searchbar-1',
     searchContainer: '.components-list',
     searchIn: 'li',
     on: {

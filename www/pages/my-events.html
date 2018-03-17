@@ -12,39 +12,67 @@
           </a>
         </div>
         <div class="title sliding">My Events</div>
-        <!-- <div class="right">
-          <a class="link" href="/add-event/"><i class="f7-icons">add</i></a>
-        </div> -->
+        <div class="right">
+          <a class="link icon-only searchbar-enable" data-searchbar=".searchbar-components-2">
+            <i class="icon f7-icons ios-only">search_strong</i>
+            <i class="icon material-icons md-only">search</i>
+          </a>
+        </div>
+
+        <form data-search-container=".components-list-2" data-search-in="a" class="searchbar searchbar-expandable searchbar-components-2 searchbar-2">
+          <div class="searchbar-inner">
+            <div class="searchbar-input-wrap">
+              <input type="search" placeholder="Search My Events" />
+              <i class="searchbar-icon"></i>
+              <span class="input-clear-button"></span>
+            </div>
+            <span class="searchbar-disable-button">Cancel</span>
+          </div>
+        </form>
       </div>
     </div>
     <!--End Navbar-->
 
     <!-- content goes here -->
         <div class="page-content">
+          <!-- <div class="searchbar-backdrop"></div> -->
           <div class="block-title">Swipe Event to Remove from My Events</div>
-          <div class="list">
+
             <div id="myEventList">
               <!--Javascrist list injected here-->
             </div>
+            <div class="list simple-list searchbar-not-found">
+              <ul>
+                <li>Nothing found</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+      <!-- </div> -->
+    <!-- </div>
+  </div> -->
 </template>
 
 <script>
   return {
     on: {
       pageInit: function () {
+
+
+
+
+
         // get events for this user
-        myEvents = [];
+        var myEvents = [];
+        var myEventKeys = [];
+        var eventData;
         myEventsRef.orderByKey().equalTo(app.user.uid).limitToFirst(1).on("child_added", function(snapshot) {
-          var eventData = snapshot.val();
+          eventData = snapshot.val();
           // debugger;
           for (var key in eventData) {
-            console.log('Event Key:' + eventData[key].eventkey)
-            myEvents.push(eventData[key].eventkey)
+            console.log('Event Key:' + eventData[key].eventkey);
+            myEvents.push(eventData[key].eventkey);
+            myEventKeys.push(key);
           }
 
           // debugger;
@@ -56,6 +84,8 @@
             for (var key in data) {
               // debugger;
               if (myEvents.includes(key)) {
+                var index = myEvents.indexOf(key);
+                // debugger;
                 name = data[key].name ? data[key].name : '';
                 date = data[key].date;
                 club = data[key].club;
@@ -64,6 +94,7 @@
                   elist[club] = [];
                 }
                   elist[club].push({
+                    myeventkey: myEventKeys[index],
                     key: key,
                     name: name,
                     date: date,
@@ -79,15 +110,15 @@
             // debugger;
             var clublis = '';
             for (club in elist) {
-              clublis +=  '<div class="block-header" style="text-transform: uppercase;">' + club + '</div>' +
-                      '<div class="list components-list">';
+              clublis +=  '<div class="block-title searchbar-found" style="text-transform: uppercase;">' + club + '</div>' +
+                      '<div class="list components-list-2 searchbar-found">';
               elis = '<ul>'
               var events = elist[club];
 
               for (var i = 0; i < events.length; i++) {
 
                 var longDateStr = moment(events[i].date, 'Y-M-D').format('ddd MMM D');
-                elis += '<li class = "swipeout">' +
+                elis += '<li class="swipeout">' +
                   '<div class="swipeout-content">' +
                   '<a class="item-content item-link" href="/view-my-event/' + events[i].key + '">' +
 
@@ -95,18 +126,33 @@
                   ' </a>' +
                   ' </div>' +
                   '<div class="swipeout-actions-right">' +
-                  // ' <a href="#" class="color-orange" onclick=eventUpdate("' + events[i].key + '");>Edit</a>' +
-                  ' <a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete">Delete</a>' +
-                  // ' <a href="#" class="swipeout-delete" onclick=eventRemove("' + events[i].key + '");>Delete</a></div>' +
+                  ' <a href="#" data-confirm="Are you sure you want to delete this item?" class="swipeout-delete" onclick=deleteFromMyEvents("' + app.user.uid + '","'+ events[i].myeventkey+ '")>Delete</a>' +
                   '</div>' +
                   '</li>';
               };
               elis += '</ul>'
               clublis += elis + '</div></div>'
             }
-            // elis += '</ul>'
-            // console.log(elis);
+
+            // console.log(clublis);
+
+
+            // debugger;
             $$('#myEventList').html(clublis);
+
+            // create new searchbar
+            var searchbar = app.searchbar.create({
+              el: '.searchbar-2',
+              searchContainer: '.components-list-2',
+              searchIn: 'li',
+              on: {
+                search(sb, query, previousQuery) {
+                  console.log(query, previousQuery);
+                  console.log('searchbar: ', searchbar.enabled);
+                }
+              }
+            });
+            
           })
 
         });
