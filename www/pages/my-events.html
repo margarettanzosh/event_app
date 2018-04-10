@@ -63,17 +63,21 @@
 
 
         // get events for this user
-        var myEvents = [];
-        var myEventKeys = [];
-        var eventData;
-        myEventsRef.orderByKey().equalTo(app.user.uid).limitToFirst(1).on("child_added", function(snapshot) {
-          eventData = snapshot.val();
-          // debugger;
-          for (var key in eventData) {
-            console.log('Event Key:' + eventData[key].eventkey);
-            myEvents.push(eventData[key].eventkey);
-            myEventKeys.push(key);
-          }
+        // debugger;
+        var myEvents = app.user.events[0];
+        var myEventKeys = app.user.events[1];
+
+        // var myEvents = [];
+        // var myEventKeys = [];
+        // var eventData;
+        // myEventsRef.orderByKey().equalTo(app.user.uid).limitToFirst(1).on("child_added", function(snapshot) {
+        //   eventData = snapshot.val();
+        //   // debugger;
+        //   for (var key in eventData) {
+        //     console.log('Event Key:' + eventData[key].eventkey);
+        //     myEvents.push(eventData[key].eventkey);
+        //     myEventKeys.push(key);
+        //   }
 
           // debugger;
           //  this will get fired on inital load as well as when ever there is a change in the data
@@ -152,10 +156,10 @@
                 }
               }
             });
-            
+
           })
 
-        });
+        // });
 
 
       },

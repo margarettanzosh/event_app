@@ -1,4 +1,5 @@
 import $ from 'dom7';
+import { window, document } from 'ssr-window';
 import Device from '../../utils/device';
 import Support from '../../utils/support';
 import ViewClass from '../../components/view/view-class';
@@ -54,7 +55,7 @@ function initClicks(app) {
         view = $(clickedLinkData.view)[0].f7View;
       } else {
         view = clicked.parents('.view')[0] && clicked.parents('.view')[0].f7View;
-        if (view && view.params.linksView) {
+        if (!clickedLink.hasClass('back') && view && view.params.linksView) {
           if (typeof view.params.linksView === 'string') view = $(view.params.linksView)[0].f7View;
           else if (view.params.linksView instanceof ViewClass) view = view.params.linksView;
         }

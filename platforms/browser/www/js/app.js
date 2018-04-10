@@ -35,19 +35,31 @@ var app = new Framework7({
   routes: routes,
   navbar: {
    hideOnPageScroll: true,
+   showOnPageScrollTop: true,
+   scrollTopOnTitleClick: true,
+   showOnPageScrollEnd: true
  },
   statusbar: {
     enabled: true,
+    overlay: true,
     iosTextColor: 'white',
-    iosBackgroundColor: '#7B1FA2'
+    iosBackgroundColor: '#7B1FA2',
+    iosOverlaysWebView: true,
+    scrollTopOnClick: true,
   },
   panel: {
      swipe: 'left',
    },
+   input: {
+    scrollIntoViewOnFocus: true,
+    scrollIntoViewCentered: true,
+  }
   // vi: {
   //   placementId: 'pltd4o7ibb9rc653x14',
   // },
 });
+
+// $$(document).on('deviceready', function(){ Keyboard.shrinkView(true); })
 
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   refreshEventPage();

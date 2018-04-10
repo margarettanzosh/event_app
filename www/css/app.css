@@ -497,8 +497,10 @@ a.hidden {
 }
 
 body {
- padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
- padding-top: env(safe-area-inset-top); /* iOS 11.2 */
+ /* iOS 11.0 */
+ /* padding-top: constant(safe-area-inset-top);  */
+ /* iOS 11.2 */
+ /* padding-top: env(safe-area-inset-top);  */
  /* background-color: #9C27B0; */
  background-color: #7B1FA2;
  color: white;
@@ -524,4 +526,14 @@ i, .icon, .icon-back {
 
 .white {
   color: white;
+}
+
+.slideInUp {
+  -webkit-animation-duration: 0.3s;
+  /* -webkit-animation-delay: 0.5s; */
+}
+
+.fadeOut {
+  -webkit-animation-duration: 1s;
+  /* -webkit-animation-delay: 0.1s; */
 }

@@ -60,7 +60,7 @@ function saveToMyEvents(uid, eventkey) {
 
     // debugger;
     for (var key in eventData) {
-      console.log('Event Key:' + eventData[key].eventkey)
+      // console.log('Event Key:' + eventData[key].eventkey)
       myEvents.push(eventData[key].eventkey)
     }
     if (myEvents.includes(eventkey)) {
@@ -68,8 +68,10 @@ function saveToMyEvents(uid, eventkey) {
     }
     else {
       db.ref('myevents/' + uid).push({
-        eventkey
+        eventkey: eventkey,
+        dateadded: Date.now()
       })
+      getMyEvents();
       app.dialog.alert('Event Added');
     }
   })
@@ -78,16 +80,37 @@ function saveToMyEvents(uid, eventkey) {
 function deleteFromMyEvents(uid, key) {
   let myRef = db.ref('myevents/' + uid);
   myRef.child(key).remove();
+  getMyEvents();
   app.dialog.alert('Event Deleted!');
   console.log("Event Deleted!");
-  // app.router.navigate('/myevents/', 'reloadCurrent');
-  // debugger;
-  // app.router.refreshPage('/myevents/');
-//   app.router.navigate("./pages/my-events.html", {
-//   reloadCurrent: true,
-//   ignoreCache: true,
-// });
 }
+
+
+  // See https://github.com/daneden/animate.css/issues/644
+//   var animationEnd = (function(el) {
+//   var animations = {
+//     animation: 'animationend',
+//     OAnimation: 'oAnimationEnd',
+//     MozAnimation: 'mozAnimationEnd',
+//     WebkitAnimation: 'webkitAnimationEnd',
+//   };
+//
+//   for (var t in animations) {
+//     if (el.style[t] !== undefined) {
+//       return animations[t];
+//     }
+//   }
+// })(document.createElement('div'));
+
+//   $$('#card1').on(animationEnd, function() {
+//     console.log("animation over");
+//     // $$('#card1').html('');
+//     // $$('#card2').addClass('animated slideInUp');
+// });
+// $$('card2').addClass('animated slideInUp');
+// $$('#card1').html('');
+// $$('#card2').addClass('animated slideInUp');
+// }
 
 
 // swipeout for events or delete event
@@ -335,7 +358,7 @@ function getEventsByClub() {
     }
 
   // get clubs
-  console.log(clubList)
+  // console.log(clubList)
 
   eventsRef.orderByChild("date").on("child_added", function(snapshot) {
     var data = snapshot.val();

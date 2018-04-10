@@ -1,4 +1,6 @@
 {
+    "EventKit.framework": 2,
+    "EventKitUI.framework": 2,
     "ImageIO.framework": 1,
     "CoreLocation.framework": 2,
     "AVFoundation.framework": 1,

@@ -59,6 +59,12 @@ var routes = [
 
   },
 
+  {
+    path: '/mynotifications/',
+    componentUrl: './pages/my-notifications.html',
+
+  },
+
   // My Event View - Added
  {
    // path: '/update-event/:key/',
@@ -82,7 +88,7 @@ var routes = [
   {
     // path: '/update-event/:key/',
     path: '/update-event/:key',
-    componentUrl: './pages/update-event.html',
+    componentUrl: './pages/update-event2.html',
   },
 
 
