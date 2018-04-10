@@ -274,6 +274,19 @@ class Calendar extends Framework7Class {
 
     return calendar;
   }
+  // eslint-disable-next-line
+  normalizeDate(date) {
+    const d = new Date(date);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+  normalizeValues(values) {
+    const calendar = this;
+    let newValues = [];
+    if (values && Array.isArray(values)) {
+      newValues = values.map(val => calendar.normalizeDate(val));
+    }
+    return newValues;
+  }
   initInput() {
     const calendar = this;
     if (!calendar.$inputEl) return;
@@ -428,6 +441,7 @@ class Calendar extends Framework7Class {
     const nextMonthHtml = calendar.renderMonth(currentDate, 'next');
 
     $wrapperEl
+      .transition(0)
       .html(`${prevMonthHtml}${currentMonthHtml}${nextMonthHtml}`)
       .transform('translate3d(0,0,0)');
     calendar.$months = $wrapperEl.find('.calendar-month');
@@ -1121,7 +1135,7 @@ class Calendar extends Framework7Class {
     if (!initialized) {
       if (value) calendar.setValue(value, 0);
       else if (params.value) {
-        calendar.setValue(params.value, 0);
+        calendar.setValue(calendar.normalizeValues(params.value), 0);
       }
     } else if (value) {
       calendar.setValue(value, 0);
@@ -1234,7 +1248,7 @@ class Calendar extends Framework7Class {
       targetEl: $inputEl,
       scrollToEl: calendar.params.scrollToInput ? $inputEl : undefined,
       content: modalContent,
-      backdrop: modalType !== 'sheet',
+      backdrop: modalType === 'popover' && app.params.popover.backdrop !== false,
       on: {
         open() {
           const modal = this;
@@ -1295,7 +1309,7 @@ class Calendar extends Framework7Class {
     }
 
     if (!calendar.initialized && calendar.params.value) {
-      calendar.setValue(calendar.params.value);
+      calendar.setValue(calendar.normalizeValues(calendar.params.value));
     }
 
     // Attach input Events

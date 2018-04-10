@@ -1,0 +1,58 @@
+{
+  "_from": "git+https://github.com/cjpearson/cordova-plugin-keyboard.git",
+  "_id": "cordova-plugin-keyboard@1.2.0",
+  "_inBundle": false,
+  "_location": "/cordova-plugin-keyboard",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/cjpearson/cordova-plugin-keyboard",
+    "rawSpec": "https://github.com/cjpearson/cordova-plugin-keyboard",
+    "saveSpec": "git+https://github.com/cjpearson/cordova-plugin-keyboard.git",
+    "fetchSpec": "https://github.com/cjpearson/cordova-plugin-keyboard.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/cjpearson/cordova-plugin-keyboard.git#7897856fc9df9ae3d017c824e2ba59079aff44bd",
+  "_spec": "https://github.com/cjpearson/cordova-plugin-keyboard",
+  "_where": "/Users/margarettanzosh/event_app",
+  "author": {
+    "name": "Apache Software Foundation"
+  },
+  "bugs": {
+    "url": "https://github.com/cjpearson/cordova-plugin-keyboard/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-keyboard",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "Cordova Keyboard Plugin",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.2.0"
+    }
+  ],
+  "homepage": "https://github.com/cjpearson/cordova-plugin-keyboard#readme",
+  "keywords": [
+    "cordova",
+    "keyboard",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "Apache 2.0",
+  "name": "cordova-plugin-keyboard",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjpearson/cordova-plugin-keyboard.git"
+  },
+  "version": "1.2.0"
+}

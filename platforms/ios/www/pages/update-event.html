@@ -18,7 +18,7 @@
     </div>
 
   <!-- content goes here -->
-    <div class="page-content">
+    <div class="page-content keep-navbar-on-scroll">
       <form id="update-form" class="list">
       <ul>
         <li>
@@ -97,9 +97,22 @@
             </div>
           </div>
         </li>
+
+        <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <textarea class="input-focused" id="notificationInput" placeholder="Enter Notification"></textarea>
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+        </li>
+
       </ul>
     </form>
   </div>
+</div>
 </template>
 <script>
   return {
@@ -119,6 +132,16 @@
         var today = new Date();
         var app = self.$app;
         var $ = self.$;
+
+        $$('textarea').on('input:notempty', function() {
+          console.log('textarea is not empty');
+          app.navbar.show('.navbar');
+        })
+
+        $$('textarea').on('input:empty', function() {
+          console.log('textarea is empty');
+          app.navbar.show('.navbar');
+        })
 
         // Fill in existing info
         var key = this.$route.params.key;
@@ -144,8 +167,17 @@
             description: $$('#descUpdate').val(),
             email: $$('#emailUpdate').val(),
             time: $$('#timeUpdate').val(),
-            room: $$('#roomUpdate').val()
+            room: $$('#roomUpdate').val(),
+            lastnote: Date.now(),
           })
+          var notification = $$('#notificationInput').val();
+          if (!notification) {
+            notification = 'There was a change made to this event.';
+          }
+          db.ref('events/' + key + '/notifications/').push({
+            text: notification,
+            datenow: Date.now()
+          });
           console.log("Event Updated! Key: " + key);
         });
 

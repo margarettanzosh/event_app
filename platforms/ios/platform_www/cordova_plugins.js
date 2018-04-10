@@ -389,6 +389,30 @@ module.exports = [
         "clobbers": [
             "cordova.logger"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-keyboard/www/keyboard.js",
+        "id": "cordova-plugin-keyboard.keyboard",
+        "pluginId": "cordova-plugin-keyboard",
+        "clobbers": [
+            "window.Keyboard"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar",
+        "pluginId": "cordova-plugin-statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-calendar/www/Calendar.js",
+        "id": "cordova-plugin-calendar.Calendar",
+        "pluginId": "cordova-plugin-calendar",
+        "clobbers": [
+            "Calendar"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -407,7 +431,10 @@ module.exports.metadata =
     "cordova-plugin-network-information": "1.3.4",
     "cordova-plugin-vibration": "2.1.6",
     "cordova-plugin-whitelist": "1.2.2",
-    "cordova-plugin-console": "1.0.7"
+    "cordova-plugin-console": "1.0.7",
+    "cordova-plugin-keyboard": "1.2.0",
+    "cordova-plugin-statusbar": "2.4.2-dev",
+    "cordova-plugin-calendar": "5.0.0"
 }
 // BOTTOM OF METADATA
 });

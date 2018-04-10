@@ -56,6 +56,16 @@
     <feature name="Console">
         <param name="ios-package" value="CDVLogger" />
     </feature>
+    <feature name="Keyboard">
+        <param name="ios-package" onload="true" value="CDVKeyboard" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Calendar">
+        <param name="ios-package" value="Calendar" />
+    </feature>
     <name>helloworld</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -113,7 +123,8 @@
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
     <preference name="CameraUsesGeolocation" value="false" />
+    <preference name="StatusBarStyle" value="black-translucent" />
     <preference name="android-minSdkVersion" value="14" />
     <preference name="StatusBarOverlaysWebView" value="true" />
-    <preference name="StatusBarStyle" value="black-translucent" />
+    <preference name="KeyboardShrinksView" value="true" />
 </widget>
