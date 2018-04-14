@@ -348,14 +348,14 @@ function getEventsByClub() {
 
   var clubList = {};
 
-  clubsRef.on("value", function(club_snapshot) {
-    var data = club_snapshot.val();
-    for (var key in data) {
-      clubList[data[key].club_name] = {
-        // club_name: data[key].club_name,
-        club_events: []
-      }
-    }
+  // clubsRef.on("value", function(club_snapshot) {
+  //   var data = club_snapshot.val();
+  //   for (var key in data) {
+  //     clubList[data[key].club_name] = {
+  //       // club_name: data[key].club_name,
+  //       club_events: []
+  //     }
+  //   }
 
   // get clubs
   // console.log(clubList)
@@ -419,7 +419,7 @@ function getEventsByClub() {
     // refresh the UI
     refreshUIByClub(clubList);
   });
-  })
+  // })
 }
 
 function refreshUIByClub(clubList) {

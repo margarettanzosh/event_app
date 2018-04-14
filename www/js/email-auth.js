@@ -296,7 +296,12 @@ function getNotifications() {
                   text: 'Please check the notifications menu',
                   closeButton: true,
                 };
-                app.notification.create(notification).open();
+                var myNotification = app.notification.create(notification);
+                myNotification.open();
+                myNotification.on('click', function() {
+                  app.router.navigate('/mynotifications/')
+                  myNotification.close();
+                })
               }
             }
           }
@@ -307,8 +312,6 @@ function getNotifications() {
   app.user.notifications = [myNotifications, myNoteKeys];
 
 
-  // var numberSpan = (myNotifications.length > 0) ? "<span class='badge color-red'>" + myNotifications.length + "</span>": "";
-  // $$('#numberNotifications').html(numberSpan);
   console.log(app.user.notifications);
   setNotificationsCount();
 }
@@ -363,7 +366,11 @@ function timeSince(date) {
     else {
       weekday = daysOfWeek[weekday];
     }
-    return weekday + hours+ ':' + d.getMinutes() + ampm;
+    var minutes = d.getMinutes();
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    return weekday + hours+ ':' + minutes + ampm;
   }
   if (interval >= 1) {
     return interval + "h ago";
