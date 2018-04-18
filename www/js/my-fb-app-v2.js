@@ -166,7 +166,7 @@ function refreshUI(list) {
       {
         emailInfo = "Contact: ";
       }
-      if (list[month % 12][i].email && list[month % 12][i].time)
+      if (list[month % 12][i].time && list[month % 12][i].room)
       {
         comma = ", ";
       }
