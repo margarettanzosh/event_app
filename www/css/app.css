@@ -537,3 +537,7 @@ i, .icon, .icon-back {
   -webkit-animation-duration: 1s;
   /* -webkit-animation-delay: 0.1s; */
 }
+
+.md .statusbar {
+    background-color: #7B1FA2;
+}
