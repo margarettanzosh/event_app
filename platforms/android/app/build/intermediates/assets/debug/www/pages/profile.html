@@ -1,0 +1,58 @@
+<template>
+  <div data-page="profile" class="page">
+
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="left">
+                <a href="#" class="back link">
+                    <i class="icon icon-back md-only"></i>
+                    <i class="f7-icons ios-only">chevron_left</i>
+                    <span class="white">Back</span>
+                </a>
+            </div>
+            <div class="title sliding">Profile</div>
+            <div class="right">
+                <a class="link" href="/update-user/">
+                    <span class="white">Edit</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="block">
+            <p>
+                Name: <span id="profile_name"></span>
+            </p>
+            <p>
+                Email: <span id="profile_email">{{user.email}}</span>
+            </p>
+            <!-- <p>
+                UID: <span id="profile_uid">{{user.uid}}</span>
+            </p> -->
+            <p>
+                Admin: <span id="profile_grade">{{user.admin}}</span>
+            </p>
+        </div>
+    </div>
+  </div>
+</template>
+<script>
+    return {
+      on: {
+        pageInit: function (e, page) {
+          console.log("page init profile")
+          $$('#profile_name').html(app.user.displayName)
+        },
+        pageAfterOut: function (e, page) {
+          console.log('Profile Page after out');
+          refreshEventPage();
+        }
+      },
+      data: function() {
+        return {
+          user: app.user,
+        };
+      }
+    }
+</script>

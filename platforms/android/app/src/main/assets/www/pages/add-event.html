@@ -1,0 +1,187 @@
+<template>
+  <div data-page="add-event" class="page">
+
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link">
+              <span class="white">Cancel</span>
+            </a>
+        </div>
+        <div class="title sliding">New Event</div>
+        <div class="right">
+            <a href="#" class="back link white" id="add_event" onclick="eventAdd();"><span class="white">Save</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- content goes here -->
+    <div class="page-content">
+      <div class="list">
+        <ul class="color-theme-gray">
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" id="name" placeholder="Enter Name of Event">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content item-input color-theme-gray">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" placeholder="Choose Club" readonly id="club-picker">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="email" id="email" placeholder="Enter Email">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" id="desc" placeholder="Enter Event Description">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" id="room" placeholder="Enter Location">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" readonly="readonly" id="date" placeholder="Choose Event Date">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                    <input type="text" id="time" readonly="readonly" placeholder="Choose Time">
+                    <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+        </ul>
+      </div>
+      <!--<div class="block block-strong no-padding no-margin margin-bottom">-->
+      <!--  <div id="time-picker-container"></div>-->
+      <!--</div>-->
+    </div>
+  </div>
+</template>
+<script>
+  return {
+    on: {
+      pageInit: function (e, page) {
+        var self = this;
+        var today = new Date();
+        var app = self.$app;
+        var $ = self.$;
+        // Try to keep statusbar visible
+        // app.statusbar.show()
+        // app.statusbar.iosOverlaysWebView(true)
+        // Default
+        self.calendarDefault = app.calendar.create({
+          inputEl: '#date',
+        });
+
+        // Time Picker
+        self.timePicker = app.picker.create({
+          // containerEl: '#time-picker-container',
+          inputEl: '#time',
+          // toolbar: false,
+          rotateEffect: true,
+
+          cols: [
+            // Hours
+            {
+              values: (function () {
+                var arr = [];
+                for (var i = 1; i <= 12; i++) { arr.push(i); }
+                  return arr;
+              })(),
+            },
+            // Divider
+            {
+              divider: true,
+              content: ':'
+            },
+            // Minutes
+            {
+              values: (function () {
+                var arr = [];
+                for (var i = 0; i <= 59; i += 5) { arr.push(i < 10 ? '0' + i : i); }
+                  return arr;
+              })(),
+            },
+            // am / pm
+            {
+              values: ['AM', 'PM'],
+            }
+          ],
+
+           formatValue: function (values, displayValues) {
+            return displayValues[0] + ':' + values[1] + ' ' + values[2] ;
+          },
+
+        });
+
+        // Club picker
+        self.clubPicker = app.picker.create({
+          inputEl: '#club-picker',
+          rotateEffect: true,
+          cols: [
+            {
+              textAlign: 'center',
+              values: getClubs(),
+            }
+          ]
+        });
+
+      },
+      pageBeforeRemove: function() {
+        var self = this;
+        self.calendarDefault.destroy();
+        self.timePicker.destroy();
+        self.clubPicker.destroy();
+      },
+    },
+  }
+</script>

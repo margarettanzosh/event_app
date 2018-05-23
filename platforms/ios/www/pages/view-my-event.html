@@ -1,0 +1,196 @@
+<template>
+  <div data-page="view-my-event" class="page">
+
+  <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+          <div class="left">
+            <a href="#" class="back link">
+              <i class="icon icon-back md-only"></i>
+              <i class="f7-icons ios-only">chevron_left</i>
+              <span class="white">Back</span>
+            </a>
+          </div>
+          <div class="title sliding">View My Event</div>
+          <!-- <div  class="right"> -->
+            <!--<a href="#" class="back link" id="update_event" onclick={{updateEventClick}}>Save</a>-->
+            <!-- <a href="#" class="back link" id="update_event"><span class="white">Save</span></a> -->
+          <!-- </div> -->
+      </div>
+    </div>
+
+  <!-- content goes here -->
+    <div class="page-content">
+      <div class="list simple-list">
+      <!-- <form id="update-form" class="list"> -->
+      <ul>
+        <li>
+          <!-- <div class="item-content item-input">-->
+              <div class="item-inner">
+                <!-- <div class="item-input-wrap"> -->
+                  <div id="nameUpdate"></div>
+                <!-- <input type="text" id="nameUpdate" placeholder="Enter Name of Event"> -->
+                <!-- <span class="input-clear-button"></span> -->
+              <!-- </div> -->
+             </div>
+          <!-- </div> -->
+        </li>
+
+        <li>
+          <!-- <div class="item-content item-input"> -->
+              <div class="item-inner">
+                <!-- <div class="item-input-wrap"> -->
+                <div id="clubUpdate"></div>
+                <!-- <span class="input-clear-button"></span> -->
+              <!-- </div> -->
+            </div>
+          <!-- </div> -->
+        </li>
+
+        <li>
+          <div class="item-inner">
+            <div id="emailUpdate" placeholder="Enter Email"></div>
+          </div>
+        </li>
+        <li>
+          <div class="item-inner">
+            <div id="descUpdate"></div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-inner">
+            <div id="roomUpdate"></div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-inner">
+            <div id="dateUpdate"></div>
+          </div>
+        </li>
+        <li>
+          <div class="item-inner">
+            <div id="timeUpdate"></div>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</template>
+<script>
+  return {
+    beforeCreate() {
+      console.log('componentBeforeCreate', this);
+      console.log(this.$route.params.key)
+    },
+
+    data: function() {
+      return {
+        updateEventClick: "updateEventDB(" + this.$route.params.key + ")"
+      }
+    },
+    on: {
+      pageInit: function (e, page) {
+        var self = this;
+        var today = new Date();
+        var app = self.$app;
+        var $ = self.$;
+
+        // Fill in existing info
+        var key = this.$route.params.key;
+
+        // get value by key
+        eventsRef.orderByKey().equalTo(key).limitToFirst(1).on("child_added", function(snapshot) {
+          var formData = snapshot.val();
+          $$('#nameUpdate').html(formData.name);
+          $$('#clubUpdate').html(formData.club);
+          $$('#descUpdate').html(formData.description);
+          $$('#dateUpdate').html(formData.date);
+          $$('#roomUpdate').html(formData.room);
+          $$('#emailUpdate').html(formData.email);
+          $$('#timeUpdate').html(formData.time);
+        });
+
+        // // update DB here. Puts the new entry into the database
+        // $$('#update_event').on('click', function () {
+        //   eventsRef.child(key).update({
+        //     name: $$('#nameUpdate').val(),
+        //     date: $$('#dateUpdate').val(),
+        //     club: $$('#clubUpdate').val(),
+        //     description: $$('#descUpdate').val(),
+        //     email: $$('#emailUpdate').val(),
+        //     time: $$('#timeUpdate').val(),
+        //     room: $$('#roomUpdate').val()
+        //   })
+        //   console.log("Event Updated! Key: " + key);
+        // });
+
+        // Default
+        self.calendarDefault = app.calendar.create({
+          inputEl: '#dateUpdate',
+        });
+
+        // Time Picker
+        self.timePicker = app.picker.create({
+          // containerEl: '#time-picker-container',
+          inputEl: '#timeUpdate',
+          // toolbar: false,
+          rotateEffect: true,
+
+          cols: [
+            // Hours
+            {
+              values: (function () {
+                var arr = [];
+                for (var i = 1; i <= 12; i++) { arr.push(i); }
+                  return arr;
+              })(),
+            },
+            // Divider
+            {
+              divider: true,
+              content: ':'
+            },
+            // Minutes
+            {
+              values: (function () {
+                var arr = [];
+                for (var i = 0; i <= 59; i += 5) { arr.push(i < 10 ? '0' + i : i); }
+                  return arr;
+              })(),
+            },
+            // am / pm
+            {
+              values: ['AM', 'PM'],
+            }
+          ],
+
+           formatValue: function (values, displayValues) {
+            return displayValues[0] + ':' + values[1] + ' ' + values[2] ;
+          },
+
+        });
+
+        // Club picker
+        self.clubPicker = app.picker.create({
+          inputEl: '#clubUpdate',
+          cols: [
+            {
+              textAlign: 'center',
+              values: getClubs(),
+            }
+          ]
+        });
+
+      },
+      pageBeforeRemove() {
+        var self = this;
+        self.calendarDefault.destroy();
+        self.timePicker.destroy();
+        self.clubPicker.destroy();
+      },
+    },
+  }
+</script>

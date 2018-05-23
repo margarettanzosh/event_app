@@ -1,0 +1,78 @@
+<template>
+  <div data-page="past-deleted-events" class="page">
+
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#" class="back link">
+            <i class="icon icon-back md-only"></i>
+            <i class="f7-icons ios-only">chevron_left</i>
+            <span class="white">Back</span>
+          </a>
+        </div>
+        <div class="title sliding">Past and Deleted Events</div>
+        <!-- <div class="right">
+          <a class="link" href="/add-event/"><i class="f7-icons">add</i></a>
+        </div> -->
+      </div>
+    </div>
+    <!--End Navbar-->
+
+    <!-- content goes here -->
+        <div class="page-content">
+          <div class="block-title">Swipe Event to Edit / Delete (will remove from DB)</div>
+          <div class="list">
+            <div id="eventPastDeletedList">
+              <!--Javascrist list injected here-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  return {
+    on: {
+      pageInit: function() {
+        // do something on page init
+        var pastDelEvents = app.user.pastDelEvents;
+        console.log(pastDelEvents);
+
+        var clublis = '';
+        for (club in pastDelEvents) {
+          clublis +=  '<div class="block-header" style="text-transform: uppercase;">' + club + '</div>' +
+                  '<div class="list components-list">';
+          elis = '<ul>'
+          var events = pastDelEvents[club];
+          console.log(events);
+          // debugger;
+          for (var i = 0; i < events.length; i++) {
+
+            var longDateStr = moment(events[i].date, 'Y-M-D').format('ddd MMM D');
+            elis += '<li class = "swipeout">' +
+              '<div class="swipeout-content">' +
+
+              ' <div class="item-inner margin-left">' + longDateStr + ':  ' + events[i].name + ' </div>' +
+
+              ' </div>' +
+              '<div class="swipeout-actions-right">' +
+              ' <a href="#" class="color-orange" onclick=eventUpdate("' + events[i].key + '");>Edit</a>' +
+
+              ' <a href="#" class="swipeout-delete" onclick=eventReallyRemove("' + events[i].key + '");>Delete</a></div>' +
+              '</li>';
+          };
+          elis += '</ul>'
+          clublis += elis + '</div></div>'
+        }
+
+
+        // console.log(elis);
+        $$('#eventPastDeletedList').html(clublis);
+        }
+      }
+    }
+
+</script>

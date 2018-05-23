@@ -1,0 +1,283 @@
+<template>
+  <div data-page="update-events" class="page">
+
+  <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+          <div class="left">
+            <a href="#" class="back link">
+              <span class="white">Cancel</span>
+            </a>
+          </div>
+          <div class="title sliding">Update Event</div>
+          <div  class="right">
+            <!--<a href="#" class="back link" id="update_event" onclick={{updateEventClick}}>Save</a>-->
+            <a href="#" class="back link" id="update_event"><span class="white">Save</span></a>
+          </div>
+      </div>
+    </div>
+
+  <!-- content goes here -->
+    <div class="page-content keep-navbar-on-scroll">
+      <form id="update-form" class="list">
+      <ul>
+        <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                <input type="text" id="nameUpdate" placeholder="Enter Name of Event">
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                <input type="text" id="clubUpdate" readonly="readonly" id="clubUpdate-picker" placeholder="Choose Club">
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                <input type="email" id="emailUpdate" placeholder="Enter Email">
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                <input type="text" id="descUpdate" placeholder="Enter Event Description">
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                <input type="text" name="room" id="roomUpdate" placeholder="Enter Location">
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                <input type="text"  readonly="readonly" id="dateUpdate" placeholder="Choose Event Date">
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                <input type="text" name="time" readonly id="timeUpdate" placeholder="Choose Event Time">
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <textarea class="input-focused" id="notificationInput" placeholder="Enter Notification"></textarea>
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+        </li> -->
+
+      </ul>
+    </form>
+    <div class="block">
+      <b>Click below to add a notification, then click save on upper right to activate.</b>
+    </div>
+
+    <div class="fab color-red fab-center-bottom fab-morph" data-morph-to=".demo-fab-fullscreen-sheet.fab-morph-target">
+      <a href="#">
+        <i class="icon f7-icons ios-only">add</i>
+        <i class="icon material-icons md-only">add</i>
+      </a>
+    </div>
+
+    <div class="demo-fab-fullscreen-sheet fab-morph-target">
+      <div class="block-title">Create a Notification for this Event</div>
+      <div class="list links-list">
+        <ul>
+          <li>
+            <div class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-input-wrap">
+                    <textarea class="input-focused" id="notificationInput" placeholder="Enter Notification"></textarea>
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+              </div>
+            </li>
+        </ul>
+
+      </div>
+      <div class="block">
+        <p class="text-align-center"><a href="#" class="fab-close button button-fill color-red">Close Panel</a><p>
+      </div>
+    </div>
+
+  </div>
+</div>
+</template>
+<script>
+  return {
+    beforeCreate() {
+      console.log('componentBeforeCreate', this);
+      console.log(this.$route.params.key)
+    },
+
+    data: function() {
+      return {
+        updateEventClick: "updateEventDB(" + this.$route.params.key + ")"
+      }
+    },
+    on: {
+      pageInit: function (e, page) {
+        var self = this;
+        var today = new Date();
+        var app = self.$app;
+        var $ = self.$;
+
+        $$('textarea').on('input:notempty', function() {
+          console.log('textarea is not empty');
+          app.navbar.show('.navbar');
+        })
+
+        $$('textarea').on('input:empty', function() {
+          console.log('textarea is empty');
+          app.navbar.show('.navbar');
+        })
+
+        // Fill in existing info
+        var key = this.$route.params.key;
+
+        // get value by key
+        eventsRef.orderByKey().equalTo(key).limitToFirst(1).on("child_added", function(snapshot) {
+          var formData = snapshot.val();
+          $$('#nameUpdate').val(formData.name);
+          $$('#clubUpdate').val(formData.club);
+          $$('#descUpdate').val(formData.description);
+          $$('#dateUpdate').val(formData.date);
+          $$('#roomUpdate').val(formData.room);
+          $$('#emailUpdate').val(formData.email);
+          $$('#timeUpdate').val(formData.time);
+        });
+
+        // update DB here. Puts the new entry into the database
+        $$('#update_event').on('click', function () {
+          eventsRef.child(key).update({
+            name: $$('#nameUpdate').val(),
+            date: $$('#dateUpdate').val(),
+            club: $$('#clubUpdate').val(),
+            description: $$('#descUpdate').val(),
+            email: $$('#emailUpdate').val(),
+            time: $$('#timeUpdate').val(),
+            room: $$('#roomUpdate').val(),
+            lastnote: Date.now(),
+          })
+          var notification = $$('#notificationInput').val();
+          if (!notification) {
+            notification = 'There was a change made to this event.';
+          }
+          db.ref('events/' + key + '/notifications/').push({
+            text: notification,
+            datenow: Date.now()
+          });
+          console.log("Event Updated! Key: " + key);
+        });
+
+        // Default
+        self.calendarDefault = app.calendar.create({
+          inputEl: '#dateUpdate',
+        });
+
+        // Time Picker
+        self.timePicker = app.picker.create({
+          // containerEl: '#time-picker-container',
+          inputEl: '#timeUpdate',
+          // toolbar: false,
+          rotateEffect: true,
+
+          cols: [
+            // Hours
+            {
+              values: (function () {
+                var arr = [];
+                for (var i = 1; i <= 12; i++) { arr.push(i); }
+                  return arr;
+              })(),
+            },
+            // Divider
+            {
+              divider: true,
+              content: ':'
+            },
+            // Minutes
+            {
+              values: (function () {
+                var arr = [];
+                for (var i = 0; i <= 59; i += 5) { arr.push(i < 10 ? '0' + i : i); }
+                  return arr;
+              })(),
+            },
+            // am / pm
+            {
+              values: ['AM', 'PM'],
+            }
+          ],
+
+           formatValue: function (values, displayValues) {
+            return displayValues[0] + ':' + values[1] + ' ' + values[2] ;
+          },
+
+        });
+
+        // Club picker
+        self.clubPicker = app.picker.create({
+          inputEl: '#clubUpdate',
+          cols: [
+            {
+              textAlign: 'center',
+              values: getClubs(),
+            }
+          ]
+        });
+
+      },
+      pageBeforeRemove() {
+        var self = this;
+        self.calendarDefault.destroy();
+        self.timePicker.destroy();
+        self.clubPicker.destroy();
+      },
+    },
+  }
+</script>

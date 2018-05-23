@@ -1,0 +1,61 @@
+<template>
+  <div data-page="update-user" class="page">
+
+  <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+          <div class="left">
+              <a href="#" class="back link"><span class="white">Cancel</span></a>
+          </div>
+          <div class="title sliding">Update User Name</div>
+          <div class="right">
+            <a href="#" class="back link" id="update_user"><span class="white">Save</span></a>
+          </div>
+      </div>
+    </div>
+
+  <!-- content goes here -->
+    <div class="page-content">
+      <form id="update-form" class="list">
+      <ul>
+        <li>
+          <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                <input type="text" id="userNameUpdate" placeholder="Enter Name">
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      </form>
+    </div>
+  </div>
+</template>
+<script>
+  return {
+    on: {
+      pageInit: function (e, page) {
+        // Fill in existing info
+        $$('#userNameUpdate').val(app.user.displayName);
+
+        // update DB here. Puts the new entry into the database
+        $$('#update_user').on('click', function () {
+          updatedName = $$('#userNameUpdate').val();
+          app.user.updateProfile({
+            displayName: updatedName
+          }).then(function(){
+            console.log("Profile Updated!");
+            $$('#profile_name').html(app.user.displayName);
+          }).catch(function(error){
+            console.log(error);
+          });
+        })
+      },
+      pageBeforeOut: function (e, page) {
+        console.log('Update User Page before out');
+    }
+  }
+}
+</script>

@@ -1,0 +1,90 @@
+<template>
+  <div data-page="add-event" class="page">
+
+    <!-- Top Navbar-->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link">
+              <span class="white">Cancel</span>
+            </a>
+        </div>
+        <div class="title sliding">New Club</div>
+        <div class="right">
+            <a href="#" class="back link white" id="add_club" onclick="clubAdd();"><span class="white">Save</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- content goes here -->
+    <div class="page-content">
+      <div class="list">
+        <ul>
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" id="clubname" placeholder="Enter Name of Club">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="email" id="clubemail" placeholder="Enter Club Leader Email">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" id="clubdesc" placeholder="Enter Club Description">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" id="clubroom" placeholder="Enter Room Number">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+        </ul>
+      </div>
+      <!--<div class="block block-strong no-padding no-margin margin-bottom">-->
+      <!--  <div id="time-picker-container"></div>-->
+      <!--</div>-->
+    </div>
+  </div>
+</template>
+<script>
+  return {
+    on: {
+      pageInit: function (e, page) {
+        var self = this;
+        var app = self.$app;
+        var $ = self.$;
+        // Try to keep statusbar visible
+        // app.statusbar.show()
+        // app.statusbar.iosOverlaysWebView(true)
+        // Default
+      },
+    },
+  }
+</script>
