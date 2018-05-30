@@ -6,25 +6,6 @@ var routes = [
     name: 'index',
   },
 
-  // // Login page - Added
-  // {
-  //   path: '/login-screen/',
-  //   componentUrl: './pages/login-screen-page.html',
-
-  // },
-
-  // // Create Account - Added
-  // {
-  //   path: '/create-account-screen/',
-  //   componentUrl: './pages/create-account-screen.html',
-  // },
-
-  // // Authorization screen - Added
-  // {
-  //   path: '/authorization-screen/',
-  //   url: './pages/authorization-screen.html',
-  // },
-
   // Profile page - Added
   {
     path: '/profile/',

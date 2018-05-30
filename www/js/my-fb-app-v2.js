@@ -260,8 +260,6 @@ function getEventsByKey() {
     }
     refreshEventEdit(elist);
     app.user.pastDelEvents = pastDelElist;
-    // console.log(app.user.pastDelEvents);
-    // debugger;
   })
 }
 
