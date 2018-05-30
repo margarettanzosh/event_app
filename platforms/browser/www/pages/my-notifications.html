@@ -28,37 +28,6 @@
 
     {{/each}}
 
-        <!-- <div style="border-radius: 12px" class="card">
-          <div class="card-header"><b>Coding Club</b>
-              <div class="float-right notification-title-right-text"><small>Wed 2:30 PM</small></div>
-              <div class="notification-close-button delete-note"></div>
-            </div>
-          <div class="card-content card-content-padding">This week's meeting is cancelled due to parent-teacher conferences.</div>
-        </div>
-
-        <div style="border-radius: 12px" class="card">
-          <div class="card-header"><b>Coding Club</b>
-              <div class="float-right notification-title-right-text"><small>Wed 2:30 PM</small></div>
-              <div class="notification-close-button delete-note"></div>
-            </div>
-          <div class="card-content card-content-padding">This week's meeting is cancelled due to parent-teacher conferences.</div>
-        </div>
-
-        <div style="border-radius: 12px" class="card">
-          <div class="card-header"><b>Ad Club</b>
-            <div class="float-right notification-title-right-text"><small>Thur 3:45 PM</small></div>
-            <div class="notification-close-button delete-note"></div>
-          </div>
-          <div class="card-content card-content-padding">The time on Thursday's meeting was changed from 2:50 to 3:20 pm.</div>
-        </div>
-
-        <div style="border-radius: 12px" class="card">
-          <div class="card-header"><b>Ad Club</b>
-            <div class="float-right notification-title-right-text"><small>Thur 3:45 PM</small></div>
-            <div class="notification-close-button delete-note"></div>
-          </div>
-          <div class="card-content card-content-padding">The time on Thursday's meeting was changed from 2:50 to 3:20 pm.</div>
-        </div> -->
 
       </div>
   </div>
@@ -90,11 +59,11 @@
         // delete from app.user.events arrays and flag in database
         var noteKey = app.user.notifications[1][this.id];
         var eventKey = app.user.notifications[0][this.id].myeventkey;
-        // debugger;
+
         // need to add this flag to the event node in my events
         db.ref('myevents/' + app.user.uid + '/' + eventKey + '/'+ noteKey).set('deleted');
 
-        console.log(app.user.notifications[0][this.id]);
+        // console.log(app.user.notifications[0][this.id]);
         app.user.notifications[0].splice(this.id, 1);
         app.user.notifications[1].splice(this.id, 1);
         setNotificationsCount();
@@ -102,21 +71,7 @@
         })
 
       }
-      //   // get events for this user'
-      //   var myEvents = app.user.events[0];
-      //   var myEventKeys = app.user.events[1];
-      //   myEventsRef.orderByKey().equalTo(app.user.uid).limitToFirst(1).on("child_added", function(snapshot) {
-      //     myEventData = snapshot.val();
-      //     debugger;
-      //     for (var key in myEventData){
-      //       for (var noteKey in myEventData[key].notifications)
-      //       {
-      //         var myNotification = myEventData[key].notifications[noteKey];
-      //         console.log("notification: " + myNotification);
-      //       }
-      //     }
-      //   })
-      //
+
       },
     }
 </script>

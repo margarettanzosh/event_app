@@ -38,38 +38,7 @@
     on: {
       pageInit: function() {
         // do something on page init
-        getDeletedPastEvents()
-        // var pastDelEvents = app.user.pastDelEvents;
-        //
-        // var clublis = '';
-        // for (club in pastDelEvents) {
-        //   clublis +=  '<div class="block-header" style="text-transform: uppercase;">' + club + '</div>' +
-        //           '<div class="list components-list">';
-        //   elis = '<ul>'
-        //   var events = pastDelEvents[club];
-        //
-        //   for (var i = 0; i < events.length; i++) {
-        //
-        //     var longDateStr = moment(events[i].date, 'Y-M-D').format('ddd MMM D');
-        //     elis += '<li class = "swipeout">' +
-        //       '<div class="swipeout-content">' +
-        //
-        //       ' <div class="item-inner margin-left">' + longDateStr + ':  ' + events[i].name + ' </div>' +
-        //
-        //       ' </div>' +
-        //       '<div class="swipeout-actions-right">' +
-        //       ' <a href="#" class="color-orange" onclick=pastEventUpdate("' + events[i].key + '");>Edit</a>' +
-        //
-        //       // ' <a href="#" class="swipeout-delete" onclick=eventReallyRemove("' + events[i].key + '");>Delete</a></div>' +
-        //       '</li>';
-        //   };
-        //   elis += '</ul>'
-        //   clublis += elis + '</div></div>'
-        // }
-        //
-        //
-        // // console.log(elis);
-        // $$('#eventPastDeletedList').html(clublis);
+          getDeletedPastEvents()
         }
       }
     }

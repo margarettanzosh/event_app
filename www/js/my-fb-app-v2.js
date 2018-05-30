@@ -42,10 +42,6 @@ function eventRemove(key) {
   console.log("Event Flagged as Deleted!");
 }
 
-// function eventReallyRemove(key) {
-//   eventsRef.child(key).remove();
-//   console.log("Event Really Deleted!");
-// }
 
 // adds existing values to form
 function eventUpdate(key) {
@@ -500,9 +496,6 @@ function refreshUIByClub(clubList) {
       }
     }
   });
-
-  // app.statusbar.show()
-  // app.statusbar.iosOverlaysWebView(true)
 };
 
 function refreshEventPage() {
