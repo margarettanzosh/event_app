@@ -20,8 +20,8 @@
 //  main.m
 //  Event_Tracker
 //
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
+//  Created by Margaret Tanzosh with the NEST+m Coding Club.
+//  Copyright NEST+m 2018. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

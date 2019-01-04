@@ -1,6 +1,3 @@
-// document.addEventListener("DOMContentLoaded", function(event) {
-
-
   // Dom7
   var $$ = Dom7;
 

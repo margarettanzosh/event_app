@@ -60,23 +60,6 @@ function refreshClubEdit(clist) {
   $$('#clubEditList').html(clis);
 };
 
-
-
-  // console.log(lis);
-  // $$('#clubsID').html(cbt);
-
-  // create searchbar
-  // var searchbar = app.searchbar.create({
-  //   el: '.searchbar',
-  //   searchContainer: '.components-list',
-  //   searchIn: 'a',
-  //   on: {
-  //     search(sb, query, previousQuery) {
-  //       console.log(query, previousQuery);
-  //     }
-  //   }
-  // });
-
 function getClubsByKey() {
   //  this will get fired on inital load as well as when ever there is a change in the data
   clubsRef.on("value", function(snapshot) {
@@ -101,15 +84,4 @@ function getClubsByKey() {
 
 }
 
-// function getClubs() {
-//   var options = [];
-//   clubsRef.on("value", function(snapshot) {
-//     var data = snapshot.val();
 
-//     for (var key in data) {
-//       options.push(data[key].club_name);
-//     }
-//     console.log(options);
-//   })
-//   return options;
-// }

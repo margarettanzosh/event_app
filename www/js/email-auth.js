@@ -5,12 +5,12 @@ function toggleSignIn() {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   if (email.length < 4) {
-    alert('Please enter an email address.');
+    app.dialog.confirm('Please enter an email address', 'NEST+m Event Tracker');
     clear();
     return;
   }
   if (password.length < 4) {
-    alert('Please enter a password.');
+    app.dialog.confirm('Please enter a password', 'NEST+m Event Tracker');
     clear();
     return;
   }
@@ -24,10 +24,10 @@ function toggleSignIn() {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode === 'auth/wrong-password') {
-      alert('Wrong password.');
+      app.dialog.confirm('Wrong password', 'NEST+m Event Tracker');
     }
     else {
-      alert(errorMessage);
+      app.dialog.confirm(errorMessage, 'NEST+m Event Tracker');
     }
     console.log(error);
     clear();
@@ -43,13 +43,13 @@ function handleSignUp() {
   var password = document.getElementById('new-password').value;
   var confirm = $$('#confirm-password').val();
   if (password.length < 4) {
-    alert('Your password is too short.');
+    app.dialog.confirm('Your password is too short!', 'NEST+m Event Tracker');
     clearCreatePW()
     return;
   }
 
   if (password != confirm) {
-    alert('Your passwords do not match.');
+    app.dialog.confirm('Your passwords do not match!', 'NEST+m Event Tracker');
     clearCreatePW()
     return;
   }
@@ -74,10 +74,10 @@ function handleSignUp() {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode == 'auth/weak-password') {
-      alert('The password is too weak.');
+      app.dialog.confirm('The password is too weak', 'NEST+m Event Tracker');
     }
     else {
-      alert(errorMessage);
+      app.dialog.confirm(errorMessage, 'NEST+m Event Tracker');
     }
     console.log(error);
     clearCreatePW();
@@ -90,22 +90,22 @@ function handleSignUp() {
  */
 function sendEmailVerification() {
   firebase.auth().currentUser.sendEmailVerification().then(function() {
-    app.dialog.confirm('Email Authorication Sent', 'NEST+m Event Tracker')
+    app.dialog.confirm('Email Authorication Sent', 'NEST+m Event Tracker');
   });
 }
 
 function sendPasswordReset() {
   var email = document.getElementById('email').value;
   firebase.auth().sendPasswordResetEmail(email).then(function() {
-    alert('Password Reset Email Sent!');
+    app.dialog.confirm('Password Reset Email Sent!', 'NEST+m Event Tracker');
   }).catch(function(error) {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode == 'auth/invalid-email') {
-      alert(errorMessage);
+      app.dialog.confirm(errorMessage, 'NEST+m Event Tracker');
     }
     else if (errorCode == 'auth/user-not-found') {
-      alert(errorMessage);
+      app.dialog.confirm(errorMessage, 'NEST+m Event Tracker');
     }
     console.log(error);
   });
@@ -131,7 +131,7 @@ function initApp() {
              app.user.admin = false;
            }
          })
-         
+
       loginScreen.close({
         animate: true
       });

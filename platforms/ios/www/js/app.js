@@ -58,12 +58,7 @@ var app = new Framework7({
     tapHold: true,
     tapHoldDelay: 750
   }
-  // vi: {
-  //   placementId: 'pltd4o7ibb9rc653x14',
-  // },
 });
-
-// $$(document).on('deviceready', function(){ Keyboard.shrinkView(true); })
 
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   refreshEventPage();
@@ -101,8 +96,5 @@ var authorizationScreen = app.popup.create({
     opened: function () {
       console.log('Authorization Screen opened')
     },
-    // closed: function() {
-    //   refreshEventPage();
-    // }
   }
 })
